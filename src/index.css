@@ -24,7 +24,7 @@
 /* Override everything to grabbing while actively dragging */
 .map-svg.is-dragging,
 .map-svg.is-dragging path.country,
-.map-svg.is-dragging .microstate-marker {
+.map-svg.is-dragging .marker-group {
   cursor: grabbing !important;
 }
 
@@ -37,18 +37,23 @@
 
 /* ── Microstate circle markers ── */
 
-.microstate-marker {
+/* Hit target group: pointer cursor, hover transitions on the visual child */
+.marker-group {
   cursor: pointer;
+}
+
+.marker-visual {
   transition: fill 0.12s ease, stroke 0.12s ease;
 }
 
 /* Same hover highlight as regular country polygons — circles ARE the country */
-.microstate-marker:hover {
+.marker-group:hover .marker-visual {
   fill: #2d4a7c;
   stroke: #4d80d0;
 }
 
-.map-svg.is-dragging .microstate-marker:hover {
+/* Suppress hover highlight during drag */
+.map-svg.is-dragging .marker-group:hover .marker-visual {
   fill: #1a2740;
   stroke: #4d7ab0;
 }

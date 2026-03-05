@@ -72,27 +72,36 @@ export default function Map() {
     const gMarkers = svg.append('g').attr('class', 'microstate-markers')
 
     const updateMarkers = (transform) => {
-      const r = Math.max(MIN_MARKER_R, BASE_MARKER_R / Math.pow(transform.k, 0.4))
-      gMarkers.selectAll('circle.microstate-marker')
-        .attr('cx', (d) => {
+      const visualR = Math.max(MIN_MARKER_R, BASE_MARKER_R / Math.pow(transform.k, 0.4))
+      gMarkers.selectAll('g.marker-group')
+        .attr('transform', (d) => {
           const p = projection(d.coords)
-          return p ? transform.applyX(p[0]) : -9999
+          if (!p) return 'translate(-9999,-9999)'
+          return `translate(${transform.applyX(p[0])},${transform.applyY(p[1])})`
         })
-        .attr('cy', (d) => {
-          const p = projection(d.coords)
-          return p ? transform.applyY(p[1]) : -9999
-        })
-        .attr('r', r)
+      gMarkers.selectAll('circle.marker-visual').attr('r', visualR)
     }
 
-    gMarkers.selectAll('circle.microstate-marker')
+    const groups = gMarkers.selectAll('g.marker-group')
       .data(MICROSTATES)
-      .join('circle')
-      .attr('class', 'microstate-marker')
+      .join('g')
+      .attr('class', 'marker-group')
       .attr('data-id', (d) => d.id)
+
+    // Invisible large hit target — constant 20px in screen space
+    groups.append('circle')
+      .attr('class', 'marker-hit')
+      .attr('r', 20)
+      .attr('fill', 'white')
+      .attr('fill-opacity', 0)
+
+    // Visible styled circle — shrinks slightly with zoom, pointer-events disabled
+    groups.append('circle')
+      .attr('class', 'marker-visual')
       .attr('fill', MARKER.fill)
       .attr('stroke', MARKER.stroke)
       .attr('stroke-width', MARKER.strokeWidth)
+      .attr('pointer-events', 'none')
 
     updateMarkers(d3.zoomIdentity)
 

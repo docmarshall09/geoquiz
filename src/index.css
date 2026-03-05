@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Map interaction ── */
+
+.map-svg {
+  cursor: grab;
+  user-select: none;
+}
+
+/* Country polygons: pointer cursor, smooth hover transition via CSS (GPU-accelerated) */
+.map-svg path.country {
+  cursor: pointer;
+  transition: fill 0.12s ease, stroke 0.12s ease, stroke-width 0.12s ease;
+}
+
+.map-svg path.country:hover {
+  fill: #2d4a7c;
+  stroke: #4d80d0;
+  stroke-width: 1.5px;
+}
+
+/* Override everything to grabbing while actively dragging */
+.map-svg.is-dragging,
+.map-svg.is-dragging path.country {
+  cursor: grabbing !important;
+}
+
+/* Suppress hover highlight during drag so you don't accidentally light up countries */
+.map-svg.is-dragging path.country:hover {
+  fill: #1a2740;
+  stroke: #0d1829;
+  stroke-width: 0.5px;
+}

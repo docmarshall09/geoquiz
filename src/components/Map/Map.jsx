@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 import { feature } from 'topojson-client'
+import { MICROSTATES } from '../../utils/microstates'
 
 const COLORS = {
   ocean: '#0a0f1a',
@@ -8,6 +9,17 @@ const COLORS = {
   border: '#0d1829',
   graticule: '#111e33',
 }
+
+const MARKER = {
+  fill: '#22d3ee',   // cyan-400 — pops against dark blue map
+  stroke: '#0e7490', // cyan-700
+  strokeWidth: 1.5,
+}
+
+// Screen-space radius at k=1. Shrinks as r = BASE_R / k^0.4 — circles get
+// smaller when zoomed in (polygon becomes the usable click target).
+const BASE_MARKER_R = 5
+const MIN_MARKER_R = 2.5
 
 const ZOOM_EXTENT = [1, 20]
 const MAP_PADDING = 20
@@ -52,6 +64,38 @@ export default function Map() {
       .attr('stroke-width', 0.4)
       .attr('pointer-events', 'none')
 
+    // ── Microstate circle markers ──
+    // Separate group that is NOT inside g.map-root, so it lives in screen space.
+    // Circles are repositioned on every zoom event via transform.applyX/Y().
+    // This gives a fixed screen-space radius that shrinks slightly as you zoom in
+    // (at close zoom the underlying polygon becomes visible and clickable).
+    const gMarkers = svg.append('g').attr('class', 'microstate-markers')
+
+    const updateMarkers = (transform) => {
+      const r = Math.max(MIN_MARKER_R, BASE_MARKER_R / Math.pow(transform.k, 0.4))
+      gMarkers.selectAll('circle.microstate-marker')
+        .attr('cx', (d) => {
+          const p = projection(d.coords)
+          return p ? transform.applyX(p[0]) : -9999
+        })
+        .attr('cy', (d) => {
+          const p = projection(d.coords)
+          return p ? transform.applyY(p[1]) : -9999
+        })
+        .attr('r', r)
+    }
+
+    gMarkers.selectAll('circle.microstate-marker')
+      .data(MICROSTATES)
+      .join('circle')
+      .attr('class', 'microstate-marker')
+      .attr('data-id', (d) => d.id)
+      .attr('fill', MARKER.fill)
+      .attr('stroke', MARKER.stroke)
+      .attr('stroke-width', MARKER.strokeWidth)
+
+    updateMarkers(d3.zoomIdentity)
+
     // Zoom + pan
     // translateExtent([[0,0],[w,h]]) keeps the map filling the viewport at all
     // zoom levels: at k=1 no panning; at k=N can pan across the full world.
@@ -60,6 +104,7 @@ export default function Map() {
       .translateExtent([[0, 0], [width, height]])
       .on('zoom', (event) => {
         g.attr('transform', event.transform)
+        updateMarkers(event.transform)
       })
 
     svg
@@ -102,6 +147,7 @@ export default function Map() {
       g.select('.graticule').attr('d', pathGen)
       g.selectAll('.country').attr('d', pathGen)
       svg.call(zoom.transform, d3.zoomIdentity)
+      updateMarkers(d3.zoomIdentity)
     }
 
     window.addEventListener('resize', handleResize)

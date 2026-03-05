@@ -152,6 +152,8 @@ export default function Map({
     document.addEventListener('mouseup', onMouseUp)
 
     // Render countries — fire onCountryClick for any click; App routes by mode
+    // For features without a numeric ISO id (e.g. Kosovo), fall back to the
+    // name property so they remain clickable and selectable.
     d3.json('/data/world-50m.json').then((topo) => {
       const countries = feature(topo, topo.objects.countries)
 
@@ -159,14 +161,15 @@ export default function Map({
         .data(countries.features)
         .join('path')
         .attr('class', 'country')
-        .attr('data-id', (d) => d.id)
+        .attr('data-id', (d) => d.id !== undefined ? d.id : d.properties?.name)
         .attr('d', pathGen)
         .attr('fill', COLORS.land)
         .attr('stroke', COLORS.border)
         .attr('stroke-width', 0.5)
         .on('click', (event, d) => {
           event.stopPropagation()
-          onCountryClickRef.current?.(String(d.id))
+          const id = d.id !== undefined ? String(d.id) : d.properties?.name
+          if (id) onCountryClickRef.current?.(id)
         })
     })
 

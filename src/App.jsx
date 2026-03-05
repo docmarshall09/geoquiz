@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Map from './components/Map/Map'
 import Scorecard from './components/Scorecard/Scorecard'
 import QuizOverlay from './components/Quiz/QuizOverlay'
-import { getCountryByIsoNumeric } from './utils/countryData'
+import QuizLauncher from './components/Quiz/QuizLauncher'
+import { getCountryByIsoNumeric, getFilteredCountries } from './utils/countryData'
 import { useQuiz } from './hooks/useQuiz'
 
 const MODES = ['Learn', 'Quiz', 'Quick Quiz']
@@ -11,7 +12,16 @@ export default function App() {
   const [mode, setMode] = useState('Learn')
   const [selectedCountryId, setSelectedCountryId] = useState(null)
 
-  const quiz = useQuiz(mode === 'Quiz')
+  // Quiz launcher state: null = not launched, options object = launched
+  const [quizOptions, setQuizOptions] = useState(null)
+
+  // Stable country list passed to useQuiz — new reference only when launcher fires
+  const quizCountries = useMemo(
+    () => (quizOptions ? getFilteredCountries(quizOptions) : null),
+    [quizOptions],
+  )
+
+  const quiz = useQuiz(quizCountries)
 
   const selectedCountry =
     mode === 'Learn' && selectedCountryId
@@ -21,20 +31,32 @@ export default function App() {
   const handleCountryClick = (isoNumeric) => {
     if (mode === 'Learn') {
       setSelectedCountryId(isoNumeric === selectedCountryId ? null : isoNumeric)
-    } else if (mode === 'Quiz') {
+    } else if (mode === 'Quiz' && quizOptions) {
       quiz.handleCountryClick(isoNumeric)
     }
   }
 
   const handleMapBackground = () => {
     if (mode === 'Learn') setSelectedCountryId(null)
-    // Quiz: ocean clicks do nothing
   }
 
   const handleModeChange = (m) => {
     setMode(m)
     setSelectedCountryId(null)
+    setQuizOptions(null) // reset launcher when switching away
   }
+
+  const handleStartQuiz = (options) => {
+    // Setting new options triggers useMemo → new array reference → useQuiz restarts
+    setQuizOptions({ ...options })
+  }
+
+  const handleRestartQuiz = () => {
+    // Force a new array reference so useQuiz re-shuffles
+    setQuizOptions((prev) => ({ ...prev }))
+  }
+
+  const quizLaunched = mode === 'Quiz' && quizOptions !== null
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#0a0f1a]">
@@ -42,7 +64,6 @@ export default function App() {
       <div className="h-[60px] flex items-center px-6 border-b border-white/5 gap-8">
         <span className="text-white font-bold tracking-tight text-lg shrink-0">GeoQuiz</span>
 
-        {/* Mode switcher */}
         <nav className="flex gap-1">
           {MODES.map((m) => (
             <button
@@ -70,7 +91,7 @@ export default function App() {
           selectedCountryId={selectedCountryId}
           onCountryClick={handleCountryClick}
           onBackgroundClick={handleMapBackground}
-          quizHighlights={mode === 'Quiz' ? quiz.highlights : null}
+          quizHighlights={quizLaunched ? quiz.highlights : null}
         />
 
         {/* Learn Mode: scorecard panel */}
@@ -81,8 +102,12 @@ export default function App() {
           />
         )}
 
-        {/* Quiz Mode: question prompt + feedback overlay */}
-        {mode === 'Quiz' && (
+        {/* Quiz Mode: launcher or active quiz overlay */}
+        {mode === 'Quiz' && !quizLaunched && (
+          <QuizLauncher onStart={handleStartQuiz} />
+        )}
+
+        {mode === 'Quiz' && quizLaunched && (
           <QuizOverlay
             currentCountry={quiz.currentCountry}
             phase={quiz.phase}
@@ -91,7 +116,7 @@ export default function App() {
             clickedCountry={quiz.clickedCountry}
             wrongList={quiz.wrongList}
             onNext={quiz.handleNext}
-            onRestart={quiz.handleRestart}
+            onRestart={handleRestartQuiz}
           />
         )}
       </div>

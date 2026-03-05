@@ -2,7 +2,9 @@
   {
     "name": "Afghanistan",
     "official_name": "Islamic Emirate of Afghanistan",
-    "aliases": ["Afghan"],
+    "aliases": [
+      "Afghan"
+    ],
     "iso_numeric": "004",
     "capital": "Kabul",
     "population": 40100000,
@@ -15,7 +17,9 @@
   {
     "name": "Albania",
     "official_name": "Republic of Albania",
-    "aliases": ["Shqipëri"],
+    "aliases": [
+      "Shqipëri"
+    ],
     "iso_numeric": "008",
     "capital": "Tirana",
     "population": 2800000,
@@ -28,7 +32,9 @@
   {
     "name": "Algeria",
     "official_name": "People's Democratic Republic of Algeria",
-    "aliases": ["Algérie"],
+    "aliases": [
+      "Algérie"
+    ],
     "iso_numeric": "012",
     "capital": "Algiers",
     "population": 45600000,
@@ -80,7 +86,10 @@
   {
     "name": "Antigua and Barbuda",
     "official_name": "Antigua and Barbuda",
-    "aliases": ["Antigua", "Barbuda"],
+    "aliases": [
+      "Antigua",
+      "Barbuda"
+    ],
     "iso_numeric": "028",
     "capital": "Saint John's",
     "population": 100000,
@@ -106,7 +115,9 @@
   {
     "name": "Armenia",
     "official_name": "Republic of Armenia",
-    "aliases": ["Hayastan"],
+    "aliases": [
+      "Hayastan"
+    ],
     "iso_numeric": "051",
     "capital": "Yerevan",
     "population": 3000000,
@@ -119,7 +130,9 @@
   {
     "name": "Australia",
     "official_name": "Commonwealth of Australia",
-    "aliases": ["Oz"],
+    "aliases": [
+      "Oz"
+    ],
     "iso_numeric": "036",
     "capital": "Canberra",
     "population": 26000000,
@@ -132,7 +145,9 @@
   {
     "name": "Austria",
     "official_name": "Republic of Austria",
-    "aliases": ["Österreich"],
+    "aliases": [
+      "Österreich"
+    ],
     "iso_numeric": "040",
     "capital": "Vienna",
     "population": 9100000,
@@ -145,7 +160,9 @@
   {
     "name": "Azerbaijan",
     "official_name": "Republic of Azerbaijan",
-    "aliases": ["Azerbaycan"],
+    "aliases": [
+      "Azerbaycan"
+    ],
     "iso_numeric": "031",
     "capital": "Baku",
     "population": 10500000,
@@ -158,7 +175,9 @@
   {
     "name": "Bahamas",
     "official_name": "Commonwealth of the Bahamas",
-    "aliases": ["The Bahamas"],
+    "aliases": [
+      "The Bahamas"
+    ],
     "iso_numeric": "044",
     "capital": "Nassau",
     "population": 400000,
@@ -210,7 +229,10 @@
   {
     "name": "Belarus",
     "official_name": "Republic of Belarus",
-    "aliases": ["Byelorussia", "Belorussia"],
+    "aliases": [
+      "Byelorussia",
+      "Belorussia"
+    ],
     "iso_numeric": "112",
     "capital": "Minsk",
     "population": 9500000,
@@ -223,7 +245,10 @@
   {
     "name": "Belgium",
     "official_name": "Kingdom of Belgium",
-    "aliases": ["Belgique", "België"],
+    "aliases": [
+      "Belgique",
+      "België"
+    ],
     "iso_numeric": "056",
     "capital": "Brussels",
     "population": 11700000,
@@ -236,7 +261,9 @@
   {
     "name": "Belize",
     "official_name": "Belize",
-    "aliases": ["British Honduras"],
+    "aliases": [
+      "British Honduras"
+    ],
     "iso_numeric": "084",
     "capital": "Belmopan",
     "population": 400000,
@@ -249,7 +276,9 @@
   {
     "name": "Benin",
     "official_name": "Republic of Benin",
-    "aliases": ["Dahomey"],
+    "aliases": [
+      "Dahomey"
+    ],
     "iso_numeric": "204",
     "capital": "Porto-Novo",
     "population": 13000000,
@@ -275,7 +304,9 @@
   {
     "name": "Bhutan",
     "official_name": "Kingdom of Bhutan",
-    "aliases": ["Druk Gyalkhap"],
+    "aliases": [
+      "Druk Gyalkhap"
+    ],
     "iso_numeric": "064",
     "capital": "Thimphu",
     "population": 780000,
@@ -301,7 +332,11 @@
   {
     "name": "Bosnia and Herzegovina",
     "official_name": "Bosnia and Herzegovina",
-    "aliases": ["Bosnia", "Herzegovina", "BiH"],
+    "aliases": [
+      "Bosnia",
+      "Herzegovina",
+      "BiH"
+    ],
     "iso_numeric": "070",
     "capital": "Sarajevo",
     "population": 3300000,
@@ -314,7 +349,9 @@
   {
     "name": "Botswana",
     "official_name": "Republic of Botswana",
-    "aliases": ["Bechuanaland"],
+    "aliases": [
+      "Bechuanaland"
+    ],
     "iso_numeric": "072",
     "capital": "Gaborone",
     "population": 2600000,
@@ -327,7 +364,9 @@
   {
     "name": "Brazil",
     "official_name": "Federative Republic of Brazil",
-    "aliases": ["Brasil"],
+    "aliases": [
+      "Brasil"
+    ],
     "iso_numeric": "076",
     "capital": "Brasília",
     "population": 215000000,
@@ -340,7 +379,10 @@
   {
     "name": "British Indian Ocean Territory",
     "official_name": "British Indian Ocean Territory",
-    "aliases": ["BIOT", "Chagos Islands"],
+    "aliases": [
+      "BIOT",
+      "Chagos Islands"
+    ],
     "iso_numeric": "086",
     "capital": "Diego Garcia",
     "population": 3000,
@@ -353,7 +395,9 @@
   {
     "name": "Brunei",
     "official_name": "Nation of Brunei, the Abode of Peace",
-    "aliases": ["Brunei Darussalam"],
+    "aliases": [
+      "Brunei Darussalam"
+    ],
     "iso_numeric": "096",
     "capital": "Bandar Seri Begawan",
     "population": 440000,
@@ -379,7 +423,9 @@
   {
     "name": "Burkina Faso",
     "official_name": "Burkina Faso",
-    "aliases": ["Upper Volta"],
+    "aliases": [
+      "Upper Volta"
+    ],
     "iso_numeric": "854",
     "capital": "Ouagadougou",
     "population": 23000000,
@@ -405,7 +451,10 @@
   {
     "name": "Cambodia",
     "official_name": "Kingdom of Cambodia",
-    "aliases": ["Kampuchea", "Khmer Republic"],
+    "aliases": [
+      "Kampuchea",
+      "Khmer Republic"
+    ],
     "iso_numeric": "116",
     "capital": "Phnom Penh",
     "population": 17000000,
@@ -444,7 +493,9 @@
   {
     "name": "Cape Verde",
     "official_name": "Republic of Cabo Verde",
-    "aliases": ["Cabo Verde"],
+    "aliases": [
+      "Cabo Verde"
+    ],
     "iso_numeric": "132",
     "capital": "Praia",
     "population": 560000,
@@ -470,7 +521,9 @@
   {
     "name": "Central African Republic",
     "official_name": "Central African Republic",
-    "aliases": ["CAR"],
+    "aliases": [
+      "CAR"
+    ],
     "iso_numeric": "140",
     "capital": "Bangui",
     "population": 5000000,
@@ -483,7 +536,9 @@
   {
     "name": "Chad",
     "official_name": "Republic of Chad",
-    "aliases": ["Tchad"],
+    "aliases": [
+      "Tchad"
+    ],
     "iso_numeric": "148",
     "capital": "N'Djamena",
     "population": 18000000,
@@ -509,7 +564,10 @@
   {
     "name": "China",
     "official_name": "People's Republic of China",
-    "aliases": ["PRC", "Zhongguo"],
+    "aliases": [
+      "PRC",
+      "Zhongguo"
+    ],
     "iso_numeric": "156",
     "capital": "Beijing",
     "population": 1425000000,
@@ -535,7 +593,9 @@
   {
     "name": "Comoros",
     "official_name": "Union of the Comoros",
-    "aliases": ["Comoro Islands"],
+    "aliases": [
+      "Comoro Islands"
+    ],
     "iso_numeric": "174",
     "capital": "Moroni",
     "population": 850000,
@@ -548,7 +608,10 @@
   {
     "name": "Congo",
     "official_name": "Republic of the Congo",
-    "aliases": ["Republic of Congo", "Congo-Brazzaville"],
+    "aliases": [
+      "Republic of Congo",
+      "Congo-Brazzaville"
+    ],
     "iso_numeric": "178",
     "capital": "Brazzaville",
     "population": 5800000,
@@ -587,7 +650,9 @@
   {
     "name": "Croatia",
     "official_name": "Republic of Croatia",
-    "aliases": ["Hrvatska"],
+    "aliases": [
+      "Hrvatska"
+    ],
     "iso_numeric": "191",
     "capital": "Zagreb",
     "population": 3900000,
@@ -613,7 +678,9 @@
   {
     "name": "Curaçao",
     "official_name": "Country of Curaçao",
-    "aliases": ["Curacao"],
+    "aliases": [
+      "Curacao"
+    ],
     "iso_numeric": "531",
     "capital": "Willemstad",
     "population": 155000,
@@ -639,7 +706,10 @@
   {
     "name": "Czech Republic",
     "official_name": "Czech Republic",
-    "aliases": ["Czechia", "Česko"],
+    "aliases": [
+      "Czechia",
+      "Česko"
+    ],
     "iso_numeric": "203",
     "capital": "Prague",
     "population": 10900000,
@@ -652,7 +722,11 @@
   {
     "name": "Democratic Republic of the Congo",
     "official_name": "Democratic Republic of the Congo",
-    "aliases": ["DRC", "Congo-Kinshasa", "Zaire"],
+    "aliases": [
+      "DRC",
+      "Congo-Kinshasa",
+      "Zaire"
+    ],
     "iso_numeric": "180",
     "capital": "Kinshasa",
     "population": 100000000,
@@ -665,7 +739,9 @@
   {
     "name": "Denmark",
     "official_name": "Kingdom of Denmark",
-    "aliases": ["Danmark"],
+    "aliases": [
+      "Danmark"
+    ],
     "iso_numeric": "208",
     "capital": "Copenhagen",
     "population": 5900000,
@@ -678,7 +754,10 @@
   {
     "name": "Djibouti",
     "official_name": "Republic of Djibouti",
-    "aliases": ["French Somaliland", "Afar and Issa"],
+    "aliases": [
+      "French Somaliland",
+      "Afar and Issa"
+    ],
     "iso_numeric": "262",
     "capital": "Djibouti",
     "population": 1000000,
@@ -782,7 +861,9 @@
   {
     "name": "Estonia",
     "official_name": "Republic of Estonia",
-    "aliases": ["Eesti"],
+    "aliases": [
+      "Eesti"
+    ],
     "iso_numeric": "233",
     "capital": "Tallinn",
     "population": 1400000,
@@ -795,7 +876,9 @@
   {
     "name": "Eswatini",
     "official_name": "Kingdom of Eswatini",
-    "aliases": ["Swaziland"],
+    "aliases": [
+      "Swaziland"
+    ],
     "iso_numeric": "748",
     "capital": "Mbabane",
     "population": 1200000,
@@ -808,7 +891,9 @@
   {
     "name": "Ethiopia",
     "official_name": "Federal Democratic Republic of Ethiopia",
-    "aliases": ["Abyssinia"],
+    "aliases": [
+      "Abyssinia"
+    ],
     "iso_numeric": "231",
     "capital": "Addis Ababa",
     "population": 120000000,
@@ -821,7 +906,10 @@
   {
     "name": "Falkland Islands",
     "official_name": "Falkland Islands",
-    "aliases": ["Islas Malvinas", "Malvinas"],
+    "aliases": [
+      "Islas Malvinas",
+      "Malvinas"
+    ],
     "iso_numeric": "238",
     "capital": "Stanley",
     "population": 3500,
@@ -834,7 +922,9 @@
   {
     "name": "Faroe Islands",
     "official_name": "Faroe Islands",
-    "aliases": ["Færøerne"],
+    "aliases": [
+      "Færøerne"
+    ],
     "iso_numeric": "234",
     "capital": "Tórshavn",
     "population": 53000,
@@ -860,7 +950,9 @@
   {
     "name": "Finland",
     "official_name": "Republic of Finland",
-    "aliases": ["Suomi"],
+    "aliases": [
+      "Suomi"
+    ],
     "iso_numeric": "246",
     "capital": "Helsinki",
     "population": 5500000,
@@ -886,7 +978,9 @@
   {
     "name": "French Polynesia",
     "official_name": "Collectivity of French Polynesia",
-    "aliases": ["Tahiti"],
+    "aliases": [
+      "Tahiti"
+    ],
     "iso_numeric": "258",
     "capital": "Papeete",
     "population": 280000,
@@ -899,7 +993,9 @@
   {
     "name": "French Southern Territories",
     "official_name": "French Southern and Antarctic Lands",
-    "aliases": ["TAAF"],
+    "aliases": [
+      "TAAF"
+    ],
     "iso_numeric": "260",
     "capital": "Saint-Pierre",
     "population": 150,
@@ -925,7 +1021,9 @@
   {
     "name": "Gambia",
     "official_name": "Republic of the Gambia",
-    "aliases": ["The Gambia"],
+    "aliases": [
+      "The Gambia"
+    ],
     "iso_numeric": "270",
     "capital": "Banjul",
     "population": 2500000,
@@ -938,7 +1036,9 @@
   {
     "name": "Georgia",
     "official_name": "Georgia",
-    "aliases": ["Sakartvelo"],
+    "aliases": [
+      "Sakartvelo"
+    ],
     "iso_numeric": "268",
     "capital": "Tbilisi",
     "population": 4000000,
@@ -951,7 +1051,9 @@
   {
     "name": "Germany",
     "official_name": "Federal Republic of Germany",
-    "aliases": ["Deutschland"],
+    "aliases": [
+      "Deutschland"
+    ],
     "iso_numeric": "276",
     "capital": "Berlin",
     "population": 84000000,
@@ -964,7 +1066,9 @@
   {
     "name": "Ghana",
     "official_name": "Republic of Ghana",
-    "aliases": ["Gold Coast"],
+    "aliases": [
+      "Gold Coast"
+    ],
     "iso_numeric": "288",
     "capital": "Accra",
     "population": 33000000,
@@ -977,7 +1081,10 @@
   {
     "name": "Greece",
     "official_name": "Hellenic Republic",
-    "aliases": ["Hellas", "Ellada"],
+    "aliases": [
+      "Hellas",
+      "Ellada"
+    ],
     "iso_numeric": "300",
     "capital": "Athens",
     "population": 10700000,
@@ -990,7 +1097,9 @@
   {
     "name": "Greenland",
     "official_name": "Greenland",
-    "aliases": ["Kalaallit Nunaat"],
+    "aliases": [
+      "Kalaallit Nunaat"
+    ],
     "iso_numeric": "304",
     "capital": "Nuuk",
     "population": 57000,
@@ -1003,7 +1112,9 @@
   {
     "name": "Grenada",
     "official_name": "Grenada",
-    "aliases": ["Spice Isle"],
+    "aliases": [
+      "Spice Isle"
+    ],
     "iso_numeric": "308",
     "capital": "Saint George's",
     "population": 115000,
@@ -1055,7 +1166,9 @@
   {
     "name": "Guinea",
     "official_name": "Republic of Guinea",
-    "aliases": ["Guinea-Conakry"],
+    "aliases": [
+      "Guinea-Conakry"
+    ],
     "iso_numeric": "324",
     "capital": "Conakry",
     "population": 13000000,
@@ -1081,7 +1194,9 @@
   {
     "name": "Guyana",
     "official_name": "Co-operative Republic of Guyana",
-    "aliases": ["British Guiana"],
+    "aliases": [
+      "British Guiana"
+    ],
     "iso_numeric": "328",
     "capital": "Georgetown",
     "population": 800000,
@@ -1107,7 +1222,9 @@
   {
     "name": "Heard Island and McDonald Islands",
     "official_name": "Heard Island and McDonald Islands",
-    "aliases": ["HIMI"],
+    "aliases": [
+      "HIMI"
+    ],
     "iso_numeric": "334",
     "capital": "",
     "population": 0,
@@ -1133,7 +1250,10 @@
   {
     "name": "Hong Kong",
     "official_name": "Hong Kong Special Administrative Region of China",
-    "aliases": ["HK", "Hongkong"],
+    "aliases": [
+      "HK",
+      "Hongkong"
+    ],
     "iso_numeric": "344",
     "capital": "Hong Kong",
     "population": 7500000,
@@ -1146,7 +1266,9 @@
   {
     "name": "Hungary",
     "official_name": "Hungary",
-    "aliases": ["Magyarország"],
+    "aliases": [
+      "Magyarország"
+    ],
     "iso_numeric": "348",
     "capital": "Budapest",
     "population": 9800000,
@@ -1159,7 +1281,9 @@
   {
     "name": "Iceland",
     "official_name": "Iceland",
-    "aliases": ["Ísland"],
+    "aliases": [
+      "Ísland"
+    ],
     "iso_numeric": "352",
     "capital": "Reykjavík",
     "population": 375000,
@@ -1172,7 +1296,10 @@
   {
     "name": "India",
     "official_name": "Republic of India",
-    "aliases": ["Bharat", "Hindustan"],
+    "aliases": [
+      "Bharat",
+      "Hindustan"
+    ],
     "iso_numeric": "356",
     "capital": "New Delhi",
     "population": 1430000000,
@@ -1198,7 +1325,9 @@
   {
     "name": "Iran",
     "official_name": "Islamic Republic of Iran",
-    "aliases": ["Persia"],
+    "aliases": [
+      "Persia"
+    ],
     "iso_numeric": "364",
     "capital": "Tehran",
     "population": 87000000,
@@ -1211,7 +1340,9 @@
   {
     "name": "Iraq",
     "official_name": "Republic of Iraq",
-    "aliases": ["Mesopotamia"],
+    "aliases": [
+      "Mesopotamia"
+    ],
     "iso_numeric": "368",
     "capital": "Baghdad",
     "population": 42000000,
@@ -1224,7 +1355,9 @@
   {
     "name": "Ireland",
     "official_name": "Republic of Ireland",
-    "aliases": ["Éire"],
+    "aliases": [
+      "Éire"
+    ],
     "iso_numeric": "372",
     "capital": "Dublin",
     "population": 5100000,
@@ -1237,7 +1370,9 @@
   {
     "name": "Isle of Man",
     "official_name": "Isle of Man",
-    "aliases": ["Mann"],
+    "aliases": [
+      "Mann"
+    ],
     "iso_numeric": "833",
     "capital": "Douglas",
     "population": 85000,
@@ -1263,7 +1398,9 @@
   {
     "name": "Italy",
     "official_name": "Italian Republic",
-    "aliases": ["Italia"],
+    "aliases": [
+      "Italia"
+    ],
     "iso_numeric": "380",
     "capital": "Rome",
     "population": 60000000,
@@ -1276,7 +1413,10 @@
   {
     "name": "Ivory Coast",
     "official_name": "Republic of Côte d'Ivoire",
-    "aliases": ["Côte d'Ivoire", "Cote d'Ivoire"],
+    "aliases": [
+      "Côte d'Ivoire",
+      "Cote d'Ivoire"
+    ],
     "iso_numeric": "384",
     "capital": "Yamoussoukro",
     "population": 27000000,
@@ -1302,7 +1442,10 @@
   {
     "name": "Japan",
     "official_name": "Japan",
-    "aliases": ["Nippon", "Nihon"],
+    "aliases": [
+      "Nippon",
+      "Nihon"
+    ],
     "iso_numeric": "392",
     "capital": "Tokyo",
     "population": 123000000,
@@ -1328,7 +1471,9 @@
   {
     "name": "Jordan",
     "official_name": "Hashemite Kingdom of Jordan",
-    "aliases": ["Transjordan"],
+    "aliases": [
+      "Transjordan"
+    ],
     "iso_numeric": "400",
     "capital": "Amman",
     "population": 10300000,
@@ -1341,7 +1486,9 @@
   {
     "name": "Kazakhstan",
     "official_name": "Republic of Kazakhstan",
-    "aliases": ["Qazaqstan"],
+    "aliases": [
+      "Qazaqstan"
+    ],
     "iso_numeric": "398",
     "capital": "Astana",
     "population": 20000000,
@@ -1367,7 +1514,9 @@
   {
     "name": "Kiribati",
     "official_name": "Republic of Kiribati",
-    "aliases": ["Gilbert Islands"],
+    "aliases": [
+      "Gilbert Islands"
+    ],
     "iso_numeric": "296",
     "capital": "South Tarawa",
     "population": 120000,
@@ -1393,7 +1542,10 @@
   {
     "name": "Kyrgyzstan",
     "official_name": "Kyrgyz Republic",
-    "aliases": ["Kirghizia", "Kirgizstan"],
+    "aliases": [
+      "Kirghizia",
+      "Kirgizstan"
+    ],
     "iso_numeric": "417",
     "capital": "Bishkek",
     "population": 7000000,
@@ -1406,7 +1558,9 @@
   {
     "name": "Laos",
     "official_name": "Lao People's Democratic Republic",
-    "aliases": ["Lao PDR"],
+    "aliases": [
+      "Lao PDR"
+    ],
     "iso_numeric": "418",
     "capital": "Vientiane",
     "population": 7500000,
@@ -1419,7 +1573,9 @@
   {
     "name": "Latvia",
     "official_name": "Republic of Latvia",
-    "aliases": ["Latvija"],
+    "aliases": [
+      "Latvija"
+    ],
     "iso_numeric": "428",
     "capital": "Riga",
     "population": 1900000,
@@ -1445,7 +1601,9 @@
   {
     "name": "Lesotho",
     "official_name": "Kingdom of Lesotho",
-    "aliases": ["Basutoland"],
+    "aliases": [
+      "Basutoland"
+    ],
     "iso_numeric": "426",
     "capital": "Maseru",
     "population": 2200000,
@@ -1497,7 +1655,9 @@
   {
     "name": "Lithuania",
     "official_name": "Republic of Lithuania",
-    "aliases": ["Lietuva"],
+    "aliases": [
+      "Lietuva"
+    ],
     "iso_numeric": "440",
     "capital": "Vilnius",
     "population": 2800000,
@@ -1523,7 +1683,9 @@
   {
     "name": "Macau",
     "official_name": "Macao Special Administrative Region of China",
-    "aliases": ["Macao"],
+    "aliases": [
+      "Macao"
+    ],
     "iso_numeric": "446",
     "capital": "Macau",
     "population": 680000,
@@ -1536,7 +1698,9 @@
   {
     "name": "Madagascar",
     "official_name": "Republic of Madagascar",
-    "aliases": ["Malagasy Republic"],
+    "aliases": [
+      "Malagasy Republic"
+    ],
     "iso_numeric": "450",
     "capital": "Antananarivo",
     "population": 28000000,
@@ -1549,7 +1713,9 @@
   {
     "name": "Malawi",
     "official_name": "Republic of Malawi",
-    "aliases": ["Nyasaland"],
+    "aliases": [
+      "Nyasaland"
+    ],
     "iso_numeric": "454",
     "capital": "Lilongwe",
     "population": 20000000,
@@ -1562,7 +1728,9 @@
   {
     "name": "Malaysia",
     "official_name": "Malaysia",
-    "aliases": ["Malaya"],
+    "aliases": [
+      "Malaya"
+    ],
     "iso_numeric": "458",
     "capital": "Kuala Lumpur",
     "population": 33000000,
@@ -1653,7 +1821,9 @@
   {
     "name": "Mexico",
     "official_name": "United Mexican States",
-    "aliases": ["México"],
+    "aliases": [
+      "México"
+    ],
     "iso_numeric": "484",
     "capital": "Mexico City",
     "population": 130000000,
@@ -1666,7 +1836,9 @@
   {
     "name": "Micronesia",
     "official_name": "Federated States of Micronesia",
-    "aliases": ["FSM"],
+    "aliases": [
+      "FSM"
+    ],
     "iso_numeric": "583",
     "capital": "Palikir",
     "population": 115000,
@@ -1679,7 +1851,9 @@
   {
     "name": "Moldova",
     "official_name": "Republic of Moldova",
-    "aliases": ["Moldavia"],
+    "aliases": [
+      "Moldavia"
+    ],
     "iso_numeric": "498",
     "capital": "Chișinău",
     "population": 2600000,
@@ -1705,7 +1879,9 @@
   {
     "name": "Mongolia",
     "official_name": "Mongolia",
-    "aliases": ["Outer Mongolia"],
+    "aliases": [
+      "Outer Mongolia"
+    ],
     "iso_numeric": "496",
     "capital": "Ulaanbaatar",
     "population": 3300000,
@@ -1718,7 +1894,9 @@
   {
     "name": "Montenegro",
     "official_name": "Montenegro",
-    "aliases": ["Crna Gora"],
+    "aliases": [
+      "Crna Gora"
+    ],
     "iso_numeric": "499",
     "capital": "Podgorica",
     "population": 620000,
@@ -1744,7 +1922,9 @@
   {
     "name": "Morocco",
     "official_name": "Kingdom of Morocco",
-    "aliases": ["Al Maghrib"],
+    "aliases": [
+      "Al Maghrib"
+    ],
     "iso_numeric": "504",
     "capital": "Rabat",
     "population": 37000000,
@@ -1770,7 +1950,9 @@
   {
     "name": "Myanmar",
     "official_name": "Republic of the Union of Myanmar",
-    "aliases": ["Burma"],
+    "aliases": [
+      "Burma"
+    ],
     "iso_numeric": "104",
     "capital": "Naypyidaw",
     "population": 55000000,
@@ -1783,7 +1965,9 @@
   {
     "name": "Namibia",
     "official_name": "Republic of Namibia",
-    "aliases": ["South West Africa"],
+    "aliases": [
+      "South West Africa"
+    ],
     "iso_numeric": "516",
     "capital": "Windhoek",
     "population": 2700000,
@@ -1796,7 +1980,9 @@
   {
     "name": "Nauru",
     "official_name": "Republic of Nauru",
-    "aliases": ["Pleasant Island"],
+    "aliases": [
+      "Pleasant Island"
+    ],
     "iso_numeric": "520",
     "capital": "Yaren",
     "population": 10000,
@@ -1822,7 +2008,9 @@
   {
     "name": "Netherlands",
     "official_name": "Kingdom of the Netherlands",
-    "aliases": ["Holland"],
+    "aliases": [
+      "Holland"
+    ],
     "iso_numeric": "528",
     "capital": "Amsterdam",
     "population": 17900000,
@@ -1835,7 +2023,9 @@
   {
     "name": "New Caledonia",
     "official_name": "New Caledonia",
-    "aliases": ["Nouvelle-Calédonie"],
+    "aliases": [
+      "Nouvelle-Calédonie"
+    ],
     "iso_numeric": "540",
     "capital": "Nouméa",
     "population": 270000,
@@ -1848,7 +2038,9 @@
   {
     "name": "New Zealand",
     "official_name": "New Zealand",
-    "aliases": ["Aotearoa"],
+    "aliases": [
+      "Aotearoa"
+    ],
     "iso_numeric": "554",
     "capital": "Wellington",
     "population": 5100000,
@@ -1926,7 +2118,9 @@
   {
     "name": "North Korea",
     "official_name": "Democratic People's Republic of Korea",
-    "aliases": ["DPRK"],
+    "aliases": [
+      "DPRK"
+    ],
     "iso_numeric": "408",
     "capital": "Pyongyang",
     "population": 26000000,
@@ -1939,7 +2133,11 @@
   {
     "name": "North Macedonia",
     "official_name": "Republic of North Macedonia",
-    "aliases": ["Macedonia", "FYROM", "Former Yugoslav Republic of Macedonia"],
+    "aliases": [
+      "Macedonia",
+      "FYROM",
+      "Former Yugoslav Republic of Macedonia"
+    ],
     "iso_numeric": "807",
     "capital": "Skopje",
     "population": 2100000,
@@ -1952,7 +2150,9 @@
   {
     "name": "Northern Mariana Islands",
     "official_name": "Commonwealth of the Northern Mariana Islands",
-    "aliases": ["CNMI"],
+    "aliases": [
+      "CNMI"
+    ],
     "iso_numeric": "580",
     "capital": "Saipan",
     "population": 52000,
@@ -1965,7 +2165,9 @@
   {
     "name": "Norway",
     "official_name": "Kingdom of Norway",
-    "aliases": ["Norge"],
+    "aliases": [
+      "Norge"
+    ],
     "iso_numeric": "578",
     "capital": "Oslo",
     "population": 5500000,
@@ -1978,7 +2180,9 @@
   {
     "name": "Oman",
     "official_name": "Sultanate of Oman",
-    "aliases": ["Muscat and Oman"],
+    "aliases": [
+      "Muscat and Oman"
+    ],
     "iso_numeric": "512",
     "capital": "Muscat",
     "population": 4500000,
@@ -2017,7 +2221,11 @@
   {
     "name": "Palestine",
     "official_name": "State of Palestine",
-    "aliases": ["Palestinian Territory", "West Bank and Gaza", "Palestinian Territories"],
+    "aliases": [
+      "Palestinian Territory",
+      "West Bank and Gaza",
+      "Palestinian Territories"
+    ],
     "iso_numeric": "275",
     "capital": "Ramallah",
     "population": 5300000,
@@ -2043,7 +2251,9 @@
   {
     "name": "Papua New Guinea",
     "official_name": "Independent State of Papua New Guinea",
-    "aliases": ["PNG"],
+    "aliases": [
+      "PNG"
+    ],
     "iso_numeric": "598",
     "capital": "Port Moresby",
     "population": 10000000,
@@ -2082,7 +2292,9 @@
   {
     "name": "Philippines",
     "official_name": "Republic of the Philippines",
-    "aliases": ["Pilipinas"],
+    "aliases": [
+      "Pilipinas"
+    ],
     "iso_numeric": "608",
     "capital": "Manila",
     "population": 115000000,
@@ -2095,7 +2307,9 @@
   {
     "name": "Pitcairn Islands",
     "official_name": "Pitcairn, Henderson, Ducie and Oeno Islands",
-    "aliases": ["Pitcairn"],
+    "aliases": [
+      "Pitcairn"
+    ],
     "iso_numeric": "612",
     "capital": "Adamstown",
     "population": 50,
@@ -2108,7 +2322,9 @@
   {
     "name": "Poland",
     "official_name": "Republic of Poland",
-    "aliases": ["Polska"],
+    "aliases": [
+      "Polska"
+    ],
     "iso_numeric": "616",
     "capital": "Warsaw",
     "population": 38000000,
@@ -2160,7 +2376,10 @@
   {
     "name": "Romania",
     "official_name": "Romania",
-    "aliases": ["Rumania", "Roumania"],
+    "aliases": [
+      "Rumania",
+      "Roumania"
+    ],
     "iso_numeric": "642",
     "capital": "Bucharest",
     "population": 19000000,
@@ -2173,7 +2392,9 @@
   {
     "name": "Russia",
     "official_name": "Russian Federation",
-    "aliases": ["Rossiya"],
+    "aliases": [
+      "Rossiya"
+    ],
     "iso_numeric": "643",
     "capital": "Moscow",
     "population": 144000000,
@@ -2199,7 +2420,11 @@
   {
     "name": "Saint Barthélemy",
     "official_name": "Collectivity of Saint-Barthélemy",
-    "aliases": ["Saint Barthelemy", "St Barts", "St. Barths"],
+    "aliases": [
+      "Saint Barthelemy",
+      "St Barts",
+      "St. Barths"
+    ],
     "iso_numeric": "652",
     "capital": "Gustavia",
     "population": 10000,
@@ -2212,7 +2437,9 @@
   {
     "name": "Saint Helena",
     "official_name": "Saint Helena, Ascension and Tristan da Cunha",
-    "aliases": ["St Helena"],
+    "aliases": [
+      "St Helena"
+    ],
     "iso_numeric": "654",
     "capital": "Jamestown",
     "population": 6000,
@@ -2225,7 +2452,11 @@
   {
     "name": "Saint Kitts and Nevis",
     "official_name": "Federation of Saint Kitts and Nevis",
-    "aliases": ["St Kitts and Nevis", "St. Kitts and Nevis", "Saint Christopher and Nevis"],
+    "aliases": [
+      "St Kitts and Nevis",
+      "St. Kitts and Nevis",
+      "Saint Christopher and Nevis"
+    ],
     "iso_numeric": "659",
     "capital": "Basseterre",
     "population": 55000,
@@ -2238,7 +2469,10 @@
   {
     "name": "Saint Lucia",
     "official_name": "Saint Lucia",
-    "aliases": ["St Lucia", "St. Lucia"],
+    "aliases": [
+      "St Lucia",
+      "St. Lucia"
+    ],
     "iso_numeric": "662",
     "capital": "Castries",
     "population": 184000,
@@ -2251,7 +2485,9 @@
   {
     "name": "Saint Martin",
     "official_name": "Saint Martin (French part)",
-    "aliases": ["Saint-Martin"],
+    "aliases": [
+      "Saint-Martin"
+    ],
     "iso_numeric": "663",
     "capital": "Marigot",
     "population": 38000,
@@ -2264,7 +2500,9 @@
   {
     "name": "Saint Pierre and Miquelon",
     "official_name": "Territorial Collectivity of Saint-Pierre and Miquelon",
-    "aliases": ["Saint-Pierre-et-Miquelon"],
+    "aliases": [
+      "Saint-Pierre-et-Miquelon"
+    ],
     "iso_numeric": "666",
     "capital": "Saint-Pierre",
     "population": 6000,
@@ -2277,7 +2515,10 @@
   {
     "name": "Saint Vincent and the Grenadines",
     "official_name": "Saint Vincent and the Grenadines",
-    "aliases": ["St Vincent", "St. Vincent and the Grenadines"],
+    "aliases": [
+      "St Vincent",
+      "St. Vincent and the Grenadines"
+    ],
     "iso_numeric": "670",
     "capital": "Kingstown",
     "population": 115000,
@@ -2290,7 +2531,9 @@
   {
     "name": "Samoa",
     "official_name": "Independent State of Samoa",
-    "aliases": ["Western Samoa"],
+    "aliases": [
+      "Western Samoa"
+    ],
     "iso_numeric": "882",
     "capital": "Apia",
     "population": 220000,
@@ -2316,7 +2559,10 @@
   {
     "name": "São Tomé and Príncipe",
     "official_name": "Democratic Republic of São Tomé and Príncipe",
-    "aliases": ["Sao Tome and Principe", "Sao Tome"],
+    "aliases": [
+      "Sao Tome and Principe",
+      "Sao Tome"
+    ],
     "iso_numeric": "678",
     "capital": "São Tomé",
     "population": 230000,
@@ -2329,7 +2575,10 @@
   {
     "name": "Saudi Arabia",
     "official_name": "Kingdom of Saudi Arabia",
-    "aliases": ["KSA", "Arabia"],
+    "aliases": [
+      "KSA",
+      "Arabia"
+    ],
     "iso_numeric": "682",
     "capital": "Riyadh",
     "population": 36000000,
@@ -2394,7 +2643,9 @@
   {
     "name": "Singapore",
     "official_name": "Republic of Singapore",
-    "aliases": ["Lion City"],
+    "aliases": [
+      "Lion City"
+    ],
     "iso_numeric": "702",
     "capital": "Singapore",
     "population": 5900000,
@@ -2407,7 +2658,9 @@
   {
     "name": "Sint Maarten",
     "official_name": "Country of Sint Maarten",
-    "aliases": ["Saint Maarten"],
+    "aliases": [
+      "Saint Maarten"
+    ],
     "iso_numeric": "534",
     "capital": "Philipsburg",
     "population": 40000,
@@ -2420,7 +2673,9 @@
   {
     "name": "Slovakia",
     "official_name": "Slovak Republic",
-    "aliases": ["Slovensko"],
+    "aliases": [
+      "Slovensko"
+    ],
     "iso_numeric": "703",
     "capital": "Bratislava",
     "population": 5500000,
@@ -2433,7 +2688,9 @@
   {
     "name": "Slovenia",
     "official_name": "Republic of Slovenia",
-    "aliases": ["Slovenija"],
+    "aliases": [
+      "Slovenija"
+    ],
     "iso_numeric": "705",
     "capital": "Ljubljana",
     "population": 2100000,
@@ -2472,7 +2729,9 @@
   {
     "name": "South Africa",
     "official_name": "Republic of South Africa",
-    "aliases": ["RSA"],
+    "aliases": [
+      "RSA"
+    ],
     "iso_numeric": "710",
     "capital": "Pretoria",
     "population": 60000000,
@@ -2485,7 +2744,9 @@
   {
     "name": "South Georgia and the South Sandwich Islands",
     "official_name": "South Georgia and the South Sandwich Islands",
-    "aliases": ["SGSSI"],
+    "aliases": [
+      "SGSSI"
+    ],
     "iso_numeric": "239",
     "capital": "King Edward Point",
     "population": 30,
@@ -2498,7 +2759,10 @@
   {
     "name": "South Korea",
     "official_name": "Republic of Korea",
-    "aliases": ["Korea", "ROK"],
+    "aliases": [
+      "Korea",
+      "ROK"
+    ],
     "iso_numeric": "410",
     "capital": "Seoul",
     "population": 51000000,
@@ -2524,7 +2788,9 @@
   {
     "name": "Spain",
     "official_name": "Kingdom of Spain",
-    "aliases": ["España"],
+    "aliases": [
+      "España"
+    ],
     "iso_numeric": "724",
     "capital": "Madrid",
     "population": 47500000,
@@ -2537,7 +2803,9 @@
   {
     "name": "Sri Lanka",
     "official_name": "Democratic Socialist Republic of Sri Lanka",
-    "aliases": ["Ceylon"],
+    "aliases": [
+      "Ceylon"
+    ],
     "iso_numeric": "144",
     "capital": "Sri Jayawardenepura Kotte",
     "population": 22000000,
@@ -2563,7 +2831,9 @@
   {
     "name": "Suriname",
     "official_name": "Republic of Suriname",
-    "aliases": ["Dutch Guiana"],
+    "aliases": [
+      "Dutch Guiana"
+    ],
     "iso_numeric": "740",
     "capital": "Paramaribo",
     "population": 600000,
@@ -2576,7 +2846,9 @@
   {
     "name": "Sweden",
     "official_name": "Kingdom of Sweden",
-    "aliases": ["Sverige"],
+    "aliases": [
+      "Sverige"
+    ],
     "iso_numeric": "752",
     "capital": "Stockholm",
     "population": 10500000,
@@ -2589,7 +2861,11 @@
   {
     "name": "Switzerland",
     "official_name": "Swiss Confederation",
-    "aliases": ["Schweiz", "Suisse", "Svizzera"],
+    "aliases": [
+      "Schweiz",
+      "Suisse",
+      "Svizzera"
+    ],
     "iso_numeric": "756",
     "capital": "Bern",
     "population": 8800000,
@@ -2615,7 +2891,11 @@
   {
     "name": "Taiwan",
     "official_name": "Republic of China",
-    "aliases": ["ROC", "Chinese Taipei", "Formosa"],
+    "aliases": [
+      "ROC",
+      "Chinese Taipei",
+      "Formosa"
+    ],
     "iso_numeric": "158",
     "capital": "Taipei",
     "population": 23500000,
@@ -2628,7 +2908,9 @@
   {
     "name": "Tajikistan",
     "official_name": "Republic of Tajikistan",
-    "aliases": ["Tadzhikistan"],
+    "aliases": [
+      "Tadzhikistan"
+    ],
     "iso_numeric": "762",
     "capital": "Dushanbe",
     "population": 10000000,
@@ -2641,7 +2923,9 @@
   {
     "name": "Tanzania",
     "official_name": "United Republic of Tanzania",
-    "aliases": ["Tanganyika"],
+    "aliases": [
+      "Tanganyika"
+    ],
     "iso_numeric": "834",
     "capital": "Dodoma",
     "population": 63000000,
@@ -2654,7 +2938,9 @@
   {
     "name": "Thailand",
     "official_name": "Kingdom of Thailand",
-    "aliases": ["Siam"],
+    "aliases": [
+      "Siam"
+    ],
     "iso_numeric": "764",
     "capital": "Bangkok",
     "population": 72000000,
@@ -2667,7 +2953,9 @@
   {
     "name": "Timor-Leste",
     "official_name": "Democratic Republic of Timor-Leste",
-    "aliases": ["East Timor"],
+    "aliases": [
+      "East Timor"
+    ],
     "iso_numeric": "626",
     "capital": "Dili",
     "population": 1300000,
@@ -2680,7 +2968,9 @@
   {
     "name": "Togo",
     "official_name": "Togolese Republic",
-    "aliases": ["French Togoland"],
+    "aliases": [
+      "French Togoland"
+    ],
     "iso_numeric": "768",
     "capital": "Lomé",
     "population": 8700000,
@@ -2693,7 +2983,9 @@
   {
     "name": "Tonga",
     "official_name": "Kingdom of Tonga",
-    "aliases": ["Friendly Islands"],
+    "aliases": [
+      "Friendly Islands"
+    ],
     "iso_numeric": "776",
     "capital": "Nuku'alofa",
     "population": 100000,
@@ -2706,7 +2998,9 @@
   {
     "name": "Trinidad and Tobago",
     "official_name": "Republic of Trinidad and Tobago",
-    "aliases": ["T&T"],
+    "aliases": [
+      "T&T"
+    ],
     "iso_numeric": "780",
     "capital": "Port of Spain",
     "population": 1500000,
@@ -2732,7 +3026,10 @@
   {
     "name": "Turkey",
     "official_name": "Republic of Türkiye",
-    "aliases": ["Türkiye", "Turkiye"],
+    "aliases": [
+      "Türkiye",
+      "Turkiye"
+    ],
     "iso_numeric": "792",
     "capital": "Ankara",
     "population": 85000000,
@@ -2758,7 +3055,9 @@
   {
     "name": "Turks and Caicos Islands",
     "official_name": "Turks and Caicos Islands",
-    "aliases": ["TCI"],
+    "aliases": [
+      "TCI"
+    ],
     "iso_numeric": "796",
     "capital": "Cockburn Town",
     "population": 45000,
@@ -2784,7 +3083,9 @@
   {
     "name": "Ukraine",
     "official_name": "Ukraine",
-    "aliases": ["Ukraina"],
+    "aliases": [
+      "Ukraina"
+    ],
     "iso_numeric": "804",
     "capital": "Kyiv",
     "population": 44000000,
@@ -2797,7 +3098,10 @@
   {
     "name": "United Arab Emirates",
     "official_name": "United Arab Emirates",
-    "aliases": ["UAE", "Emirates"],
+    "aliases": [
+      "UAE",
+      "Emirates"
+    ],
     "iso_numeric": "784",
     "capital": "Abu Dhabi",
     "population": 10000000,
@@ -2810,7 +3114,12 @@
   {
     "name": "United Kingdom",
     "official_name": "United Kingdom of Great Britain and Northern Ireland",
-    "aliases": ["UK", "Britain", "Great Britain", "England"],
+    "aliases": [
+      "UK",
+      "Britain",
+      "Great Britain",
+      "England"
+    ],
     "iso_numeric": "826",
     "capital": "London",
     "population": 67000000,
@@ -2823,7 +3132,11 @@
   {
     "name": "United States",
     "official_name": "United States of America",
-    "aliases": ["USA", "US", "America"],
+    "aliases": [
+      "USA",
+      "US",
+      "America"
+    ],
     "iso_numeric": "840",
     "capital": "Washington, D.C.",
     "population": 335000000,
@@ -2849,7 +3162,10 @@
   {
     "name": "U.S. Virgin Islands",
     "official_name": "United States Virgin Islands",
-    "aliases": ["USVI", "Virgin Islands"],
+    "aliases": [
+      "USVI",
+      "Virgin Islands"
+    ],
     "iso_numeric": "850",
     "capital": "Charlotte Amalie",
     "population": 100000,
@@ -2862,7 +3178,9 @@
   {
     "name": "Uzbekistan",
     "official_name": "Republic of Uzbekistan",
-    "aliases": ["Uzbekiston"],
+    "aliases": [
+      "Uzbekiston"
+    ],
     "iso_numeric": "860",
     "capital": "Tashkent",
     "population": 36000000,
@@ -2875,7 +3193,9 @@
   {
     "name": "Vanuatu",
     "official_name": "Republic of Vanuatu",
-    "aliases": ["New Hebrides"],
+    "aliases": [
+      "New Hebrides"
+    ],
     "iso_numeric": "548",
     "capital": "Port Vila",
     "population": 340000,
@@ -2888,7 +3208,10 @@
   {
     "name": "Vatican City",
     "official_name": "Vatican City State",
-    "aliases": ["Holy See", "The Vatican"],
+    "aliases": [
+      "Holy See",
+      "The Vatican"
+    ],
     "iso_numeric": "336",
     "capital": "Vatican City",
     "population": 800,
@@ -2914,7 +3237,9 @@
   {
     "name": "Vietnam",
     "official_name": "Socialist Republic of Vietnam",
-    "aliases": ["Viet Nam"],
+    "aliases": [
+      "Viet Nam"
+    ],
     "iso_numeric": "704",
     "capital": "Hanoi",
     "population": 98000000,
@@ -2927,7 +3252,10 @@
   {
     "name": "Virgin Islands (British)",
     "official_name": "British Virgin Islands",
-    "aliases": ["BVI", "British Virgin Islands"],
+    "aliases": [
+      "BVI",
+      "British Virgin Islands"
+    ],
     "iso_numeric": "092",
     "capital": "Road Town",
     "population": 30000,
@@ -2953,7 +3281,10 @@
   {
     "name": "Western Sahara",
     "official_name": "Western Sahara",
-    "aliases": ["Sahrawi Arab Democratic Republic", "SADR"],
+    "aliases": [
+      "Sahrawi Arab Democratic Republic",
+      "SADR"
+    ],
     "iso_numeric": "732",
     "capital": "Laayoune",
     "population": 575000,
@@ -2979,7 +3310,9 @@
   {
     "name": "Zambia",
     "official_name": "Republic of Zambia",
-    "aliases": ["Northern Rhodesia"],
+    "aliases": [
+      "Northern Rhodesia"
+    ],
     "iso_numeric": "894",
     "capital": "Lusaka",
     "population": 20000000,
@@ -2992,7 +3325,9 @@
   {
     "name": "Zimbabwe",
     "official_name": "Republic of Zimbabwe",
-    "aliases": ["Rhodesia"],
+    "aliases": [
+      "Rhodesia"
+    ],
     "iso_numeric": "716",
     "capital": "Harare",
     "population": 15000000,
@@ -3005,7 +3340,9 @@
   {
     "name": "Åland Islands",
     "official_name": "Åland Islands",
-    "aliases": ["Aland Islands"],
+    "aliases": [
+      "Aland Islands"
+    ],
     "iso_numeric": "248",
     "capital": "Mariehamn",
     "population": 30000,
@@ -3040,5 +3377,22 @@
     "region": "Caribbean",
     "is_territory": true,
     "flag_emoji": "🇦🇼"
+  },
+  {
+    "name": "Kosovo",
+    "official_name": "Republic of Kosovo",
+    "aliases": [
+      "Kosova",
+      "XK",
+      "XKX"
+    ],
+    "iso_numeric": "Kosovo",
+    "capital": "Pristina",
+    "population": 1800000,
+    "area_km2": 10887,
+    "gdp_ppp_per_capita": 13000,
+    "region": "Europe",
+    "is_territory": false,
+    "flag_emoji": "🇽🇰"
   }
 ]

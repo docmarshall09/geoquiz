@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { getSovereignNations, getCountryByIsoNumeric } from '../utils/countryData'
+import { getCountryByIsoNumeric } from '../utils/countryData'
 import { useProgress } from './useProgress'
 
 function shuffle(arr) {
@@ -20,9 +20,10 @@ function shuffle(arr) {
  *   'incorrect' — wrong click; user must click Next manually
  *   'complete'  — all countries exhausted; show round summary
  *
- * @param {boolean} active — true when Quiz mode is selected
+ * @param {Array|null} countries — the filtered country list to quiz on.
+ *   null means the quiz is inactive. Pass a new array reference to start/restart.
  */
-export function useQuiz(active) {
+export function useQuiz(countries) {
   const { recordAttempt } = useProgress()
 
   const [queue, setQueue] = useState([])
@@ -32,19 +33,16 @@ export function useQuiz(active) {
   const [score, setScore] = useState({ correct: 0, incorrect: 0 })
   const [wrongList, setWrongList] = useState([])
 
-  // ── Start / restart a round ──────────────────────────────────────────────
-  const startRound = useCallback(() => {
-    setQueue(shuffle(getSovereignNations()))
+  // ── Start a new round whenever the countries list changes (new launch) ───
+  useEffect(() => {
+    if (!countries) return
+    setQueue(shuffle(countries))
     setIndex(0)
     setPhase('asking')
     setClickedId(null)
     setScore({ correct: 0, incorrect: 0 })
     setWrongList([])
-  }, [])
-
-  useEffect(() => {
-    if (active) startRound()
-  }, [active, startRound])
+  }, [countries]) // reference changes only when launcher fires "Start Quiz"
 
   // ── Auto-advance after correct ───────────────────────────────────────────
   useEffect(() => {
@@ -123,6 +121,5 @@ export function useQuiz(active) {
     wrongList,
     handleCountryClick,
     handleNext,
-    handleRestart: startRound,
   }
 }

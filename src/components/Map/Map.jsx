@@ -10,6 +10,10 @@ const COLORS = {
   graticule: '#111e33',
   selected: '#2d4a7c',
   selectedStroke: '#4d80d0',
+  correct: '#14532d',
+  correctStroke: '#22c55e',
+  wrong: '#5c1a1a',
+  wrongStroke: '#ef4444',
 }
 
 const MARKER = {
@@ -26,16 +30,20 @@ const MIN_MARKER_R = 4
 const ZOOM_EXTENT = [1, 20]
 const MAP_PADDING = 20
 
-export default function Map({ mode, selectedCountryId, onCountryClick, onBackgroundClick }) {
+export default function Map({
+  mode,
+  selectedCountryId,
+  onCountryClick,
+  onBackgroundClick,
+  quizHighlights,
+}) {
   const svgRef = useRef(null)
 
   // Refs so D3 event handlers always read the latest props without stale closures
   const onCountryClickRef = useRef(onCountryClick)
   const onBackgroundClickRef = useRef(onBackgroundClick)
-  const modeRef = useRef(mode)
   useEffect(() => { onCountryClickRef.current = onCountryClick }, [onCountryClick])
   useEffect(() => { onBackgroundClickRef.current = onBackgroundClick }, [onBackgroundClick])
-  useEffect(() => { modeRef.current = mode }, [mode])
 
   // ── One-time D3 setup ──
   useEffect(() => {
@@ -100,7 +108,7 @@ export default function Map({ mode, selectedCountryId, onCountryClick, onBackgro
       .attr('data-id', (d) => d.id)
       .on('click', (event, d) => {
         event.stopPropagation()
-        if (modeRef.current === 'Learn') onCountryClickRef.current?.(d.id)
+        onCountryClickRef.current?.(d.id)
       })
 
     // Invisible large hit target — constant 20px in screen space
@@ -143,7 +151,7 @@ export default function Map({ mode, selectedCountryId, onCountryClick, onBackgro
     svgEl.addEventListener('mousedown', onMouseDown)
     document.addEventListener('mouseup', onMouseUp)
 
-    // Render countries — click handler in Learn mode; hover via CSS :hover
+    // Render countries — fire onCountryClick for any click; App routes by mode
     d3.json('/data/world-50m.json').then((topo) => {
       const countries = feature(topo, topo.objects.countries)
 
@@ -158,7 +166,7 @@ export default function Map({ mode, selectedCountryId, onCountryClick, onBackgro
         .attr('stroke-width', 0.5)
         .on('click', (event, d) => {
           event.stopPropagation()
-          if (modeRef.current === 'Learn') onCountryClickRef.current?.(String(d.id))
+          onCountryClickRef.current?.(String(d.id))
         })
     })
 
@@ -187,38 +195,51 @@ export default function Map({ mode, selectedCountryId, onCountryClick, onBackgro
     }
   }, [])
 
-  // ── Highlight selected country whenever selectedCountryId changes ──
+  // ── Apply all highlights: Learn selection + quiz feedback ──
+  // Runs whenever selectedCountryId or quizHighlights changes.
   useEffect(() => {
     const svgEl = svgRef.current
     if (!svgEl) return
     const svg = d3.select(svgEl)
 
-    // Reset all countries to default
+    // Reset everything to default
     svg.selectAll('path.country')
       .attr('fill', COLORS.land)
       .attr('stroke', COLORS.border)
       .attr('stroke-width', 0.5)
-
-    // Reset all microstate markers to default
     svg.selectAll('g.marker-group circle.marker-visual')
       .attr('fill', MARKER.fill)
       .attr('stroke', MARKER.stroke)
       .attr('stroke-width', MARKER.strokeWidth)
 
-    if (!selectedCountryId) return
+    // Learn mode: selected country
+    if (selectedCountryId) {
+      svg.select(`path.country[data-id="${selectedCountryId}"]`)
+        .attr('fill', COLORS.selected)
+        .attr('stroke', COLORS.selectedStroke)
+        .attr('stroke-width', 1.5)
+      svg.select(`g.marker-group[data-id="${selectedCountryId}"] circle.marker-visual`)
+        .attr('fill', COLORS.selected)
+        .attr('stroke', COLORS.selectedStroke)
+        .attr('stroke-width', 1.5)
+    }
 
-    // Highlight selected country polygon
-    svg.select(`path.country[data-id="${selectedCountryId}"]`)
-      .attr('fill', COLORS.selected)
-      .attr('stroke', COLORS.selectedStroke)
-      .attr('stroke-width', 1.5)
-
-    // Highlight selected microstate marker
-    svg.select(`g.marker-group[data-id="${selectedCountryId}"] circle.marker-visual`)
-      .attr('fill', COLORS.selected)
-      .attr('stroke', COLORS.selectedStroke)
-      .attr('stroke-width', 1.5)
-  }, [selectedCountryId])
+    // Quiz mode: correct / wrong / correct-reveal highlights
+    if (quizHighlights) {
+      Object.entries(quizHighlights).forEach(([id, state]) => {
+        const fill = state === 'wrong' ? COLORS.wrong : COLORS.correct
+        const stroke = state === 'wrong' ? COLORS.wrongStroke : COLORS.correctStroke
+        svg.select(`path.country[data-id="${id}"]`)
+          .attr('fill', fill)
+          .attr('stroke', stroke)
+          .attr('stroke-width', 1.5)
+        svg.select(`g.marker-group[data-id="${id}"] circle.marker-visual`)
+          .attr('fill', fill)
+          .attr('stroke', stroke)
+          .attr('stroke-width', 1.5)
+      })
+    }
+  }, [selectedCountryId, quizHighlights])
 
   return (
     <div

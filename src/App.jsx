@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import Map from './components/Map/Map'
 import Scorecard from './components/Scorecard/Scorecard'
+import QuizOverlay from './components/Quiz/QuizOverlay'
 import { getCountryByIsoNumeric } from './utils/countryData'
+import { useQuiz } from './hooks/useQuiz'
 
 const MODES = ['Learn', 'Quiz', 'Quick Quiz']
 
@@ -9,17 +11,28 @@ export default function App() {
   const [mode, setMode] = useState('Learn')
   const [selectedCountryId, setSelectedCountryId] = useState(null)
 
-  const selectedCountry = selectedCountryId
-    ? getCountryByIsoNumeric(selectedCountryId)
-    : null
+  const quiz = useQuiz(mode === 'Quiz')
+
+  const selectedCountry =
+    mode === 'Learn' && selectedCountryId
+      ? getCountryByIsoNumeric(selectedCountryId)
+      : null
 
   const handleCountryClick = (isoNumeric) => {
-    if (mode !== 'Learn') return
-    setSelectedCountryId(isoNumeric === selectedCountryId ? null : isoNumeric)
+    if (mode === 'Learn') {
+      setSelectedCountryId(isoNumeric === selectedCountryId ? null : isoNumeric)
+    } else if (mode === 'Quiz') {
+      quiz.handleCountryClick(isoNumeric)
+    }
   }
 
   const handleMapBackground = () => {
-    if (mode !== 'Learn') return
+    if (mode === 'Learn') setSelectedCountryId(null)
+    // Quiz: ocean clicks do nothing
+  }
+
+  const handleModeChange = (m) => {
+    setMode(m)
     setSelectedCountryId(null)
   }
 
@@ -34,18 +47,15 @@ export default function App() {
           {MODES.map((m) => (
             <button
               key={m}
-              onClick={() => {
-                setMode(m)
-                setSelectedCountryId(null)
-              }}
+              onClick={() => handleModeChange(m)}
               className={[
                 'px-4 py-1.5 rounded-md text-sm font-medium transition-colors',
                 mode === m
                   ? 'bg-blue-600 text-white'
                   : 'text-white/50 hover:text-white/80 hover:bg-white/5',
-                m !== 'Learn' ? 'opacity-40 cursor-not-allowed' : '',
+                m === 'Quick Quiz' ? 'opacity-40 cursor-not-allowed' : '',
               ].join(' ')}
-              disabled={m !== 'Learn'}
+              disabled={m === 'Quick Quiz'}
             >
               {m}
             </button>
@@ -53,18 +63,35 @@ export default function App() {
         </nav>
       </div>
 
-      {/* Map + Scorecard layer */}
+      {/* Map + overlay layer */}
       <div className="relative" style={{ height: 'calc(100vh - 60px)' }}>
         <Map
           mode={mode}
           selectedCountryId={selectedCountryId}
           onCountryClick={handleCountryClick}
           onBackgroundClick={handleMapBackground}
+          quizHighlights={mode === 'Quiz' ? quiz.highlights : null}
         />
-        {selectedCountry && (
+
+        {/* Learn Mode: scorecard panel */}
+        {mode === 'Learn' && selectedCountry && (
           <Scorecard
             country={selectedCountry}
             onClose={() => setSelectedCountryId(null)}
+          />
+        )}
+
+        {/* Quiz Mode: question prompt + feedback overlay */}
+        {mode === 'Quiz' && (
+          <QuizOverlay
+            currentCountry={quiz.currentCountry}
+            phase={quiz.phase}
+            score={quiz.score}
+            position={quiz.position}
+            clickedCountry={quiz.clickedCountry}
+            wrongList={quiz.wrongList}
+            onNext={quiz.handleNext}
+            onRestart={quiz.handleRestart}
           />
         )}
       </div>

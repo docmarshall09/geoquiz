@@ -13,7 +13,7 @@ const COLORS = {
 const MARKER = {
   fill: '#1a2740',   // same as land — blends in at rest
   stroke: '#4d7ab0', // subtle blue ring so circles are still findable
-  strokeWidth: 2,
+  strokeWidth: 1,
 }
 
 // Screen-space radius at k=1. Generous enough to click reliably (14px diameter).

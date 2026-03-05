@@ -8,6 +8,8 @@ const COLORS = {
   land: '#1a2740',
   border: '#0d1829',
   graticule: '#111e33',
+  selected: '#2d4a7c',
+  selectedStroke: '#4d80d0',
 }
 
 const MARKER = {
@@ -24,9 +26,18 @@ const MIN_MARKER_R = 4
 const ZOOM_EXTENT = [1, 20]
 const MAP_PADDING = 20
 
-export default function Map() {
+export default function Map({ mode, selectedCountryId, onCountryClick, onBackgroundClick }) {
   const svgRef = useRef(null)
 
+  // Refs so D3 event handlers always read the latest props without stale closures
+  const onCountryClickRef = useRef(onCountryClick)
+  const onBackgroundClickRef = useRef(onBackgroundClick)
+  const modeRef = useRef(mode)
+  useEffect(() => { onCountryClickRef.current = onCountryClick }, [onCountryClick])
+  useEffect(() => { onBackgroundClickRef.current = onBackgroundClick }, [onBackgroundClick])
+  useEffect(() => { modeRef.current = mode }, [mode])
+
+  // ── One-time D3 setup ──
   useEffect(() => {
     const svgEl = svgRef.current
     const { width, height } = svgEl.getBoundingClientRect()
@@ -35,12 +46,14 @@ export default function Map() {
       .attr('width', width)
       .attr('height', height)
 
-    // Ocean fill covering the full SVG
+    // Ocean fill — also acts as background click target
     svg.append('rect')
       .attr('class', 'ocean-bg')
       .attr('width', width)
       .attr('height', height)
       .attr('fill', COLORS.ocean)
+      .style('cursor', 'grab')
+      .on('click', () => onBackgroundClickRef.current?.())
 
     // Natural Earth projection — best looking for a flat world map
     const projection = d3.geoNaturalEarth1()
@@ -67,8 +80,6 @@ export default function Map() {
     // ── Microstate circle markers ──
     // Separate group that is NOT inside g.map-root, so it lives in screen space.
     // Circles are repositioned on every zoom event via transform.applyX/Y().
-    // This gives a fixed screen-space radius that shrinks slightly as you zoom in
-    // (at close zoom the underlying polygon becomes visible and clickable).
     const gMarkers = svg.append('g').attr('class', 'microstate-markers')
 
     const updateMarkers = (transform) => {
@@ -87,6 +98,10 @@ export default function Map() {
       .join('g')
       .attr('class', 'marker-group')
       .attr('data-id', (d) => d.id)
+      .on('click', (event, d) => {
+        event.stopPropagation()
+        if (modeRef.current === 'Learn') onCountryClickRef.current?.(d.id)
+      })
 
     // Invisible large hit target — constant 20px in screen space
     groups.append('circle')
@@ -128,7 +143,7 @@ export default function Map() {
     svgEl.addEventListener('mousedown', onMouseDown)
     document.addEventListener('mouseup', onMouseUp)
 
-    // Render countries — hover entirely via CSS :hover on path.country (no JS handlers)
+    // Render countries — click handler in Learn mode; hover via CSS :hover
     d3.json('/data/world-50m.json').then((topo) => {
       const countries = feature(topo, topo.objects.countries)
 
@@ -141,6 +156,10 @@ export default function Map() {
         .attr('fill', COLORS.land)
         .attr('stroke', COLORS.border)
         .attr('stroke-width', 0.5)
+        .on('click', (event, d) => {
+          event.stopPropagation()
+          if (modeRef.current === 'Learn') onCountryClickRef.current?.(String(d.id))
+        })
     })
 
     // Resize: refit projection, update translate extent, reset zoom
@@ -168,10 +187,43 @@ export default function Map() {
     }
   }, [])
 
+  // ── Highlight selected country whenever selectedCountryId changes ──
+  useEffect(() => {
+    const svgEl = svgRef.current
+    if (!svgEl) return
+    const svg = d3.select(svgEl)
+
+    // Reset all countries to default
+    svg.selectAll('path.country')
+      .attr('fill', COLORS.land)
+      .attr('stroke', COLORS.border)
+      .attr('stroke-width', 0.5)
+
+    // Reset all microstate markers to default
+    svg.selectAll('g.marker-group circle.marker-visual')
+      .attr('fill', MARKER.fill)
+      .attr('stroke', MARKER.stroke)
+      .attr('stroke-width', MARKER.strokeWidth)
+
+    if (!selectedCountryId) return
+
+    // Highlight selected country polygon
+    svg.select(`path.country[data-id="${selectedCountryId}"]`)
+      .attr('fill', COLORS.selected)
+      .attr('stroke', COLORS.selectedStroke)
+      .attr('stroke-width', 1.5)
+
+    // Highlight selected microstate marker
+    svg.select(`g.marker-group[data-id="${selectedCountryId}"] circle.marker-visual`)
+      .attr('fill', COLORS.selected)
+      .attr('stroke', COLORS.selectedStroke)
+      .attr('stroke-width', 1.5)
+  }, [selectedCountryId])
+
   return (
     <div
       className="w-full"
-      style={{ height: 'calc(100vh - 60px)', background: COLORS.ocean }}
+      style={{ height: '100%', background: COLORS.ocean }}
     >
       <svg
         ref={svgRef}

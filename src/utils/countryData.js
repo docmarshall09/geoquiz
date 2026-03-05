@@ -1,5 +1,9 @@
 import Fuse from 'fuse.js'
-import countriesRaw from '/data/countries.json'
+
+// Fetched from public/data/ — keeps the file out of the JS bundle
+// Top-level await suspends module evaluation until data is ready;
+// all callers get synchronous-style access after the initial load.
+const countriesRaw = await fetch('/data/countries.json').then((r) => r.json())
 
 // Build lookup map once at module load
 const byIsoNumeric = new Map(countriesRaw.map((c) => [c.iso_numeric, c]))

@@ -39,13 +39,16 @@
 
 .microstate-marker {
   cursor: pointer;
-  transition: fill 0.12s ease;
+  transition: fill 0.12s ease, stroke 0.12s ease;
 }
 
+/* Same hover highlight as regular country polygons — circles ARE the country */
 .microstate-marker:hover {
-  fill: #a5f3fc; /* cyan-200 — brighter on hover */
+  fill: #2d4a7c;
+  stroke: #4d80d0;
 }
 
 .map-svg.is-dragging .microstate-marker:hover {
-  fill: #22d3ee; /* no hover highlight while dragging */
+  fill: #22d3ee;
+  stroke: #0e7490;
 }

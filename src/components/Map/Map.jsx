@@ -11,15 +11,15 @@ const COLORS = {
 }
 
 const MARKER = {
-  fill: '#22d3ee',   // cyan-400 — pops against dark blue map
-  stroke: '#0e7490', // cyan-700
-  strokeWidth: 1.5,
+  fill: '#1a2740',   // same as land — blends in at rest
+  stroke: '#4d7ab0', // subtle blue ring so circles are still findable
+  strokeWidth: 2,
 }
 
-// Screen-space radius at k=1. Shrinks as r = BASE_R / k^0.4 — circles get
-// smaller when zoomed in (polygon becomes the usable click target).
-const BASE_MARKER_R = 5
-const MIN_MARKER_R = 2.5
+// Screen-space radius at k=1. Generous enough to click reliably (14px diameter).
+// Shrinks as r = BASE_R / k^0.4 as you zoom in (polygon becomes usable).
+const BASE_MARKER_R = 7
+const MIN_MARKER_R = 4
 
 const ZOOM_EXTENT = [1, 20]
 const MAP_PADDING = 20

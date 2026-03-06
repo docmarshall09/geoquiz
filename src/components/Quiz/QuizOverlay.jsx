@@ -136,6 +136,14 @@ function MapToNameOverlay({ currentCountry, phase, score, position, typedAnswer,
     }
   }, [phase, currentCountry?.iso_numeric])
 
+  // Enter key advances to next question while in incorrect phase
+  useEffect(() => {
+    if (phase !== 'incorrect') return
+    const handler = (e) => { if (e.key === 'Enter') onNext() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [phase, onNext])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     onTextSubmit(inputValue)

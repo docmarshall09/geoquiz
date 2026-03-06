@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { getCountryByIsoNumeric } from '../utils/countryData'
+import { getCountryByIsoNumeric, searchCountryByName } from '../utils/countryData'
 import { matchesCountry } from '../utils/fuzzyMatch'
 import { useProgress } from './useProgress'
 
@@ -29,6 +29,8 @@ export function useQuiz(countries, direction = 'name-to-map') {
   // Name→Map: stores isoNumeric of clicked country
   // Map→Name: stores the raw text the user typed
   const [answerId, setAnswerId] = useState(null)
+  // Map→Name: iso_numeric of the real country the user's text matched (if any)
+  const [guessedCountryId, setGuessedCountryId] = useState(null)
   const [score, setScore] = useState({ correct: 0, incorrect: 0 })
   const [wrongList, setWrongList] = useState([])
 
@@ -39,6 +41,7 @@ export function useQuiz(countries, direction = 'name-to-map') {
     setIndex(0)
     setPhase('asking')
     setAnswerId(null)
+    setGuessedCountryId(null)
     setScore({ correct: 0, incorrect: 0 })
     setWrongList([])
   }, [countries])
@@ -96,13 +99,22 @@ export function useQuiz(countries, direction = 'name-to-map') {
       const trimmed = input.trim()
       if (!trimmed) return
       setAnswerId(trimmed)
-      resolveAnswer(matchesCountry(trimmed, currentCountry))
+      const isCorrect = matchesCountry(trimmed, currentCountry)
+      if (!isCorrect) {
+        // Find the real country the user's text best matches (for map highlight)
+        const guessResults = searchCountryByName(trimmed)
+        const guessId = guessResults.length > 0 ? guessResults[0].iso_numeric : null
+        // Only highlight if it's a different country than the target
+        setGuessedCountryId(guessId && guessId !== currentCountry.iso_numeric ? guessId : null)
+      }
+      resolveAnswer(isCorrect)
     },
     [direction, phase, currentCountry, resolveAnswer],
   )
 
   // ── Manual advance (after incorrect) ────────────────────────────────────
   const handleNext = useCallback(() => {
+    setGuessedCountryId(null)
     setIndex((prev) => {
       const next = prev + 1
       if (next >= queue.length) {
@@ -134,11 +146,18 @@ export function useQuiz(countries, direction = 'name-to-map') {
       } else if (phase === 'correct') {
         h[currentCountry.iso_numeric] = 'correct'
       } else if (phase === 'incorrect') {
-        h[currentCountry.iso_numeric] = 'wrong'
+        if (guessedCountryId) {
+          // Mirror Name→Map: guessed country = red, target = green reveal
+          h[guessedCountryId] = 'wrong'
+          h[currentCountry.iso_numeric] = 'correct-reveal'
+        } else {
+          // No identifiable guess — just mark target red
+          h[currentCountry.iso_numeric] = 'wrong'
+        }
       }
     }
     return h
-  }, [direction, phase, answerId, currentCountry])
+  }, [direction, phase, answerId, currentCountry, guessedCountryId])
 
   return {
     currentCountry,

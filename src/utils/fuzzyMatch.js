@@ -24,13 +24,18 @@ export function matchesCountry(input, country) {
     ...(Array.isArray(country.aliases) ? country.aliases : []),
   ].filter(Boolean)
 
-  // 1. Substring match — user's answer appears inside any accepted name
-  for (const n of names) {
-    if (n.toLowerCase().includes(qLower)) return true
+  // 1. Substring match — user's answer appears inside any accepted name.
+  //    Require ≥5 chars to prevent generic fragments ("land", "republic", "ia")
+  //    from matching multiple countries.
+  if (qLower.length >= 5) {
+    for (const n of names) {
+      if (n.toLowerCase().includes(qLower)) return true
+    }
   }
 
-  // 2. Fuzzy match — tolerates typos with a forgiving threshold
-  //    threshold 0.45: accepts answers ~45% different from the target
-  const fuse = new Fuse(names, { threshold: 0.45 })
+  // 2. Fuzzy match — tolerates genuine typos (Jamaca→Jamaica, Kyrgzstan→Kyrgyzstan).
+  //    threshold 0.3 rejects clearly-wrong-country inputs ("Greenland" for Iceland,
+  //    "Czech Republic" for Austria) while still accepting 1-3 char misspellings.
+  const fuse = new Fuse(names, { threshold: 0.3, minMatchCharLength: 3 })
   return fuse.search(q).length > 0
 }

@@ -7,9 +7,15 @@ const SCOPE_OPTIONS = [
   { value: 'territories', label: 'Territories only' },
 ]
 
+const DIRECTIONS = [
+  { value: 'name-to-map', label: 'Name → Map', hint: 'click' },
+  { value: 'map-to-name', label: 'Map → Name', hint: 'type' },
+]
+
 export default function QuizLauncher({ onStart }) {
   const [selectedRegions, setSelectedRegions] = useState(new Set(REGIONS))
   const [scope, setScope] = useState('nations')
+  const [direction, setDirection] = useState('name-to-map')
 
   const allSelected = selectedRegions.size === REGIONS.length
 
@@ -38,9 +44,9 @@ export default function QuizLauncher({ onStart }) {
   const handleStart = () => {
     if (filteredCount === 0) return
     onStart({
-      // null = all regions (no filtering needed)
       regions: selectedRegions.size < REGIONS.length ? [...selectedRegions] : null,
       scope,
+      direction,
     })
   }
 
@@ -59,10 +65,39 @@ export default function QuizLauncher({ onStart }) {
         {/* Header */}
         <div className="px-6 pt-6 pb-4 border-b border-white/5">
           <h2 className="text-white font-bold text-xl">Quiz Setup</h2>
-          <p className="text-white/35 text-xs mt-0.5">Name → Map</p>
         </div>
 
         <div className="px-6 py-5 space-y-5">
+          {/* ── Direction ── */}
+          <div>
+            <div className="text-white/40 text-[10px] uppercase tracking-widest mb-3">
+              Direction
+            </div>
+            <div className="flex rounded-lg overflow-hidden border border-white/10">
+              {DIRECTIONS.map(({ value, label, hint }) => (
+                <button
+                  key={value}
+                  onClick={() => setDirection(value)}
+                  className={[
+                    'flex-1 py-2.5 text-sm font-medium transition-colors',
+                    direction === value
+                      ? 'bg-blue-600 text-white'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/5',
+                  ].join(' ')}
+                >
+                  {label}
+                  <span
+                    className={`block text-[10px] font-normal mt-0.5 ${
+                      direction === value ? 'text-blue-200/70' : 'text-white/30'
+                    }`}
+                  >
+                    {hint}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
           {/* ── Regions ── */}
           <div>
             <div className="text-white/40 text-[10px] uppercase tracking-widest mb-3">

@@ -21,7 +21,7 @@ export default function App() {
     [quizOptions],
   )
 
-  const quiz = useQuiz(quizCountries)
+  const quiz = useQuiz(quizCountries, quizOptions?.direction ?? 'name-to-map')
 
   const selectedCountry =
     mode === 'Learn' && selectedCountryId
@@ -31,7 +31,7 @@ export default function App() {
   const handleCountryClick = (isoNumeric) => {
     if (mode === 'Learn') {
       setSelectedCountryId(isoNumeric === selectedCountryId ? null : isoNumeric)
-    } else if (mode === 'Quiz' && quizOptions) {
+    } else if (mode === 'Quiz' && quizOptions && quizOptions.direction !== 'map-to-name') {
       quiz.handleCountryClick(isoNumeric)
     }
   }
@@ -109,13 +109,16 @@ export default function App() {
 
         {mode === 'Quiz' && quizLaunched && (
           <QuizOverlay
+            direction={quizOptions.direction ?? 'name-to-map'}
             currentCountry={quiz.currentCountry}
             phase={quiz.phase}
             score={quiz.score}
             position={quiz.position}
             clickedCountry={quiz.clickedCountry}
+            typedAnswer={quiz.typedAnswer}
             wrongList={quiz.wrongList}
             onNext={quiz.handleNext}
+            onTextSubmit={quiz.handleTextSubmit}
             onRestart={handleRestartQuiz}
           />
         )}

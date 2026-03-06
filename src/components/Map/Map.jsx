@@ -14,6 +14,9 @@ const COLORS = {
   correctStroke: '#22c55e',
   wrong: '#5c1a1a',
   wrongStroke: '#ef4444',
+  // Quiz target — teal/cyan, distinct from green/red/blue
+  target: '#134e4a',
+  targetStroke: '#2dd4bf',
 }
 
 const MARKER = {
@@ -26,6 +29,9 @@ const MARKER = {
 // Shrinks as r = BASE_R / k^0.4 as you zoom in (polygon becomes usable).
 const BASE_MARKER_R = 7
 const MIN_MARKER_R = 4
+// Quiz-target marker is larger so it's identifiable
+const BASE_TARGET_R = 13
+const MIN_TARGET_R = 8
 
 const ZOOM_EXTENT = [1, 20]
 const MAP_PADDING = 20
@@ -44,6 +50,11 @@ export default function Map({
   const onBackgroundClickRef = useRef(onBackgroundClick)
   useEffect(() => { onCountryClickRef.current = onCountryClick }, [onCountryClick])
   useEffect(() => { onBackgroundClickRef.current = onBackgroundClick }, [onBackgroundClick])
+
+  // Refs shared between the one-time D3 setup and the highlights effect
+  const quizHighlightsRef = useRef(quizHighlights)
+  const currentTransformRef = useRef(null) // latest zoom transform
+  const updateMarkersRef = useRef(null)    // updateMarkers fn defined in D3 setup
 
   // ── One-time D3 setup ──
   useEffect(() => {
@@ -91,15 +102,21 @@ export default function Map({
     const gMarkers = svg.append('g').attr('class', 'microstate-markers')
 
     const updateMarkers = (transform) => {
+      currentTransformRef.current = transform
+      const hl = quizHighlightsRef.current ?? {}
       const visualR = Math.max(MIN_MARKER_R, BASE_MARKER_R / Math.pow(transform.k, 0.4))
+      const targetR = Math.max(MIN_TARGET_R, BASE_TARGET_R / Math.pow(transform.k, 0.4))
       gMarkers.selectAll('g.marker-group')
         .attr('transform', (d) => {
           const p = projection(d.coords)
           if (!p) return 'translate(-9999,-9999)'
           return `translate(${transform.applyX(p[0])},${transform.applyY(p[1])})`
         })
-      gMarkers.selectAll('circle.marker-visual').attr('r', visualR)
+      gMarkers.selectAll('circle.marker-visual').attr('r', (d) =>
+        hl[d.id] === 'target' ? targetR : visualR
+      )
     }
+    updateMarkersRef.current = updateMarkers
 
     const groups = gMarkers.selectAll('g.marker-group')
       .data(MICROSTATES)
@@ -205,11 +222,16 @@ export default function Map({
     if (!svgEl) return
     const svg = d3.select(svgEl)
 
+    // Keep ref in sync so updateMarkers can read latest highlights
+    quizHighlightsRef.current = quizHighlights
+
     // Reset everything to default
     svg.selectAll('path.country')
       .attr('fill', COLORS.land)
       .attr('stroke', COLORS.border)
       .attr('stroke-width', 0.5)
+    svg.selectAll('g.marker-group')
+      .classed('quiz-target', false)
     svg.selectAll('g.marker-group circle.marker-visual')
       .attr('fill', MARKER.fill)
       .attr('stroke', MARKER.stroke)
@@ -227,20 +249,41 @@ export default function Map({
         .attr('stroke-width', 1.5)
     }
 
-    // Quiz mode: correct / wrong / correct-reveal highlights
+    // Quiz mode highlights
     if (quizHighlights) {
       Object.entries(quizHighlights).forEach(([id, state]) => {
-        const fill = state === 'wrong' ? COLORS.wrong : COLORS.correct
-        const stroke = state === 'wrong' ? COLORS.wrongStroke : COLORS.correctStroke
-        svg.select(`path.country[data-id="${id}"]`)
-          .attr('fill', fill)
-          .attr('stroke', stroke)
-          .attr('stroke-width', 1.5)
-        svg.select(`g.marker-group[data-id="${id}"] circle.marker-visual`)
-          .attr('fill', fill)
-          .attr('stroke', stroke)
-          .attr('stroke-width', 1.5)
+        if (state === 'target') {
+          // Teal highlight on polygon
+          svg.select(`path.country[data-id="${id}"]`)
+            .attr('fill', COLORS.target)
+            .attr('stroke', COLORS.targetStroke)
+            .attr('stroke-width', 1.5)
+          // Teal + pulsing CSS class on microstate marker
+          svg.select(`g.marker-group[data-id="${id}"]`)
+            .classed('quiz-target', true)
+          svg.select(`g.marker-group[data-id="${id}"] circle.marker-visual`)
+            .attr('fill', COLORS.target)
+            .attr('stroke', COLORS.targetStroke)
+            .attr('stroke-width', 2)
+        } else {
+          const fill = state === 'wrong' ? COLORS.wrong : COLORS.correct
+          const stroke = state === 'wrong' ? COLORS.wrongStroke : COLORS.correctStroke
+          svg.select(`path.country[data-id="${id}"]`)
+            .attr('fill', fill)
+            .attr('stroke', stroke)
+            .attr('stroke-width', 1.5)
+          svg.select(`g.marker-group[data-id="${id}"] circle.marker-visual`)
+            .attr('fill', fill)
+            .attr('stroke', stroke)
+            .attr('stroke-width', 1.5)
+        }
       })
+    }
+
+    // Re-run updateMarkers so the target gets its larger radius immediately
+    // (without waiting for a zoom event)
+    if (updateMarkersRef.current && currentTransformRef.current) {
+      updateMarkersRef.current(currentTransformRef.current)
     }
   }, [selectedCountryId, quizHighlights])
 

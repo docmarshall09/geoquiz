@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { getCountryByIsoNumeric } from '../utils/countryData'
+import { matchesCountry } from '../utils/fuzzyMatch'
 import { useProgress } from './useProgress'
 
 function shuffle(arr) {
@@ -12,37 +13,35 @@ function shuffle(arr) {
 }
 
 /**
- * Quiz state machine for Name→Map mode.
+ * Quiz state machine — supports both Name→Map (click) and Map→Name (type) directions.
  *
- * Phases:
- *   'asking'    — waiting for the user to click a country
- *   'correct'   — correct click; auto-advances after 1.5 s
- *   'incorrect' — wrong click; user must click Next manually
- *   'complete'  — all countries exhausted; show round summary
+ * Phases: 'asking' | 'correct' | 'incorrect' | 'complete'
  *
- * @param {Array|null} countries — the filtered country list to quiz on.
- *   null means the quiz is inactive. Pass a new array reference to start/restart.
+ * @param {Array|null} countries  — filtered country list; new reference = restart
+ * @param {'name-to-map'|'map-to-name'} direction
  */
-export function useQuiz(countries) {
+export function useQuiz(countries, direction = 'name-to-map') {
   const { recordAttempt } = useProgress()
 
   const [queue, setQueue] = useState([])
   const [index, setIndex] = useState(0)
   const [phase, setPhase] = useState('asking')
-  const [clickedId, setClickedId] = useState(null)
+  // Name→Map: stores isoNumeric of clicked country
+  // Map→Name: stores the raw text the user typed
+  const [answerId, setAnswerId] = useState(null)
   const [score, setScore] = useState({ correct: 0, incorrect: 0 })
   const [wrongList, setWrongList] = useState([])
 
-  // ── Start a new round whenever the countries list changes (new launch) ───
+  // ── Start/restart when countries list changes ────────────────────────────
   useEffect(() => {
     if (!countries) return
     setQueue(shuffle(countries))
     setIndex(0)
     setPhase('asking')
-    setClickedId(null)
+    setAnswerId(null)
     setScore({ correct: 0, incorrect: 0 })
     setWrongList([])
-  }, [countries]) // reference changes only when launcher fires "Start Quiz"
+  }, [countries])
 
   // ── Auto-advance after correct ───────────────────────────────────────────
   useEffect(() => {
@@ -55,7 +54,7 @@ export function useQuiz(countries) {
           return prev
         }
         setPhase('asking')
-        setClickedId(null)
+        setAnswerId(null)
         return next
       })
     }, 1500)
@@ -64,15 +63,10 @@ export function useQuiz(countries) {
 
   const currentCountry = queue[index] ?? null
 
-  // ── Click handler (called by App when a map country is clicked) ──────────
-  const handleCountryClick = useCallback(
-    (isoNumeric) => {
-      if (phase !== 'asking' || !currentCountry) return
-
-      const isCorrect = isoNumeric === currentCountry.iso_numeric
+  // ── Shared answer resolution ─────────────────────────────────────────────
+  const resolveAnswer = useCallback(
+    (isCorrect) => {
       recordAttempt(currentCountry.iso_numeric, isCorrect)
-
-      setClickedId(isoNumeric)
       if (isCorrect) {
         setPhase('correct')
         setScore((s) => ({ ...s, correct: s.correct + 1 }))
@@ -82,7 +76,29 @@ export function useQuiz(countries) {
         setWrongList((wl) => [...wl, currentCountry])
       }
     },
-    [phase, currentCountry, recordAttempt],
+    [currentCountry, recordAttempt],
+  )
+
+  // ── Name→Map: map country click ──────────────────────────────────────────
+  const handleCountryClick = useCallback(
+    (isoNumeric) => {
+      if (direction !== 'name-to-map' || phase !== 'asking' || !currentCountry) return
+      setAnswerId(isoNumeric)
+      resolveAnswer(isoNumeric === currentCountry.iso_numeric)
+    },
+    [direction, phase, currentCountry, resolveAnswer],
+  )
+
+  // ── Map→Name: typed answer submission ────────────────────────────────────
+  const handleTextSubmit = useCallback(
+    (input) => {
+      if (direction !== 'map-to-name' || phase !== 'asking' || !currentCountry) return
+      const trimmed = input.trim()
+      if (!trimmed) return
+      setAnswerId(trimmed)
+      resolveAnswer(matchesCountry(trimmed, currentCountry))
+    },
+    [direction, phase, currentCountry, resolveAnswer],
   )
 
   // ── Manual advance (after incorrect) ────────────────────────────────────
@@ -94,22 +110,35 @@ export function useQuiz(countries) {
         return prev
       }
       setPhase('asking')
-      setClickedId(null)
+      setAnswerId(null)
       return next
     })
   }, [queue.length])
 
-  // ── Map highlights: { [isoNumeric]: 'correct' | 'wrong' | 'correct-reveal' } ──
+  // ── Map highlights ───────────────────────────────────────────────────────
   const highlights = useMemo(() => {
     const h = {}
-    if (phase === 'correct' && currentCountry) {
-      h[currentCountry.iso_numeric] = 'correct'
-    } else if (phase === 'incorrect') {
-      if (clickedId) h[clickedId] = 'wrong'
-      if (currentCountry) h[currentCountry.iso_numeric] = 'correct-reveal'
+    if (!currentCountry) return h
+
+    if (direction === 'name-to-map') {
+      if (phase === 'correct') {
+        h[currentCountry.iso_numeric] = 'correct'
+      } else if (phase === 'incorrect') {
+        if (answerId) h[answerId] = 'wrong'
+        h[currentCountry.iso_numeric] = 'correct-reveal'
+      }
+    } else {
+      // Map→Name: show target during asking, then result color
+      if (phase === 'asking') {
+        h[currentCountry.iso_numeric] = 'target'
+      } else if (phase === 'correct') {
+        h[currentCountry.iso_numeric] = 'correct'
+      } else if (phase === 'incorrect') {
+        h[currentCountry.iso_numeric] = 'wrong'
+      }
     }
     return h
-  }, [phase, clickedId, currentCountry])
+  }, [direction, phase, answerId, currentCountry])
 
   return {
     currentCountry,
@@ -117,9 +146,11 @@ export function useQuiz(countries) {
     score,
     position: { current: index + 1, total: queue.length },
     highlights,
-    clickedCountry: clickedId ? getCountryByIsoNumeric(clickedId) : null,
+    clickedCountry: direction === 'name-to-map' && answerId ? getCountryByIsoNumeric(answerId) : null,
+    typedAnswer: direction === 'map-to-name' ? answerId : null,
     wrongList,
     handleCountryClick,
+    handleTextSubmit,
     handleNext,
   }
 }

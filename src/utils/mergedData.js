@@ -6,7 +6,7 @@
  *
  * Each country object gains these extra fields (null when not found):
  *   hdi, hdi_rank, travel_advisory, independence_year, independence_from,
- *   sovereignty_type
+ *   sovereignty_type, territory_of
  */
 
 import countriesRaw from './countryData' // default export = raw array (top-level await)
@@ -32,5 +32,6 @@ export const mergedCountries = countriesRaw.map((c) => {
     independence_year: s.independence_year !== undefined ? s.independence_year : null,
     independence_from: s.independence_from !== undefined ? s.independence_from : null,
     sovereignty_type: s.sovereignty_type ?? null,
+    territory_of: s.territory_of !== undefined ? s.territory_of : null,
   }
 })

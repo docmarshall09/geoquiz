@@ -1,21 +1,67 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import Map from './components/Map/Map'
 import Scorecard from './components/Scorecard/Scorecard'
 import QuizOverlay from './components/Quiz/QuizOverlay'
 import QuizLauncher from './components/Quiz/QuizLauncher'
+import QuickQuizLauncher from './components/QuickQuiz/QuickQuizLauncher'
+import QuickQuizResults from './components/QuickQuiz/QuickQuizResults'
 import { getCountryByIsoNumeric, getFilteredCountries } from './utils/countryData'
 import { useQuiz } from './hooks/useQuiz'
+import { useProgress } from './hooks/useProgress'
 
 const MODES = ['Learn', 'Quiz', 'Quick Quiz']
+const QQ_COUNT = 10
+const MIN_ATTEMPTS = 5
+
+function shuffleArr(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+/**
+ * Pure function — builds the Quick Quiz country list.
+ * Called at launch time so getProgress() reflects the latest localStorage state.
+ */
+function buildQQCountries(options, progress) {
+  const pool = getFilteredCountries({ regions: options.regions, scope: options.scope })
+
+  if (!options.weakSpots) {
+    return shuffleArr(pool).slice(0, QQ_COUNT)
+  }
+
+  // Weak Spots: sort by worst accuracy among countries with enough attempts
+  const withData = pool.filter((c) => {
+    const p = progress[c.iso_numeric]
+    return p && p.seen >= MIN_ATTEMPTS
+  })
+
+  withData.sort((a, b) => {
+    const pa = progress[a.iso_numeric]
+    const pb = progress[b.iso_numeric]
+    const accA = pa.correct / pa.seen
+    const accB = pb.correct / pb.seen
+    return accA - accB // ascending: worst accuracy first
+  })
+
+  const weakIds = new Set(withData.map((c) => c.iso_numeric))
+  const unseen = shuffleArr(pool.filter((c) => !weakIds.has(c.iso_numeric)))
+
+  // Take weakest countries first, backfill with unseen
+  const selected = [...withData.slice(0, QQ_COUNT), ...unseen].slice(0, QQ_COUNT)
+  return shuffleArr(selected)
+}
 
 export default function App() {
   const [mode, setMode] = useState('Learn')
   const [selectedCountryId, setSelectedCountryId] = useState(null)
 
-  // Quiz launcher state: null = not launched, options object = launched
+  // ── Regular Quiz ──────────────────────────────────────────────────────────
   const [quizOptions, setQuizOptions] = useState(null)
 
-  // Stable country list passed to useQuiz — new reference only when launcher fires
   const quizCountries = useMemo(
     () => (quizOptions ? getFilteredCountries(quizOptions) : null),
     [quizOptions],
@@ -23,16 +69,63 @@ export default function App() {
 
   const quiz = useQuiz(quizCountries, quizOptions?.direction ?? 'name-to-map')
 
+  // ── Quick Quiz ────────────────────────────────────────────────────────────
+  const { getProgress } = useProgress()
+  const [qqOptions, setQqOptions] = useState(null)
+
+  // qqCountries rebuilt only when qqOptions changes (new reference = fresh quiz)
+  const qqCountries = useMemo(
+    () => (qqOptions ? buildQQCountries(qqOptions, getProgress()) : null),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [qqOptions],
+  )
+
+  const quickQuiz = useQuiz(qqCountries, qqOptions?.direction ?? 'name-to-map')
+
+  // Timer
+  const qqStartTimeRef = useRef(null)
+  const [qqElapsedSeconds, setQqElapsedSeconds] = useState(0)
+
+  // Start timer when a new QQ is launched
+  useEffect(() => {
+    if (qqCountries) {
+      qqStartTimeRef.current = Date.now()
+      setQqElapsedSeconds(0)
+    }
+  }, [qqCountries])
+
+  // Capture elapsed time when QQ completes
+  useEffect(() => {
+    if (quickQuiz.phase === 'complete' && qqStartTimeRef.current) {
+      const elapsed = Math.round((Date.now() - qqStartTimeRef.current) / 1000)
+      setQqElapsedSeconds(elapsed)
+      qqStartTimeRef.current = null
+    }
+  }, [quickQuiz.phase])
+
+  // ── Derived state ─────────────────────────────────────────────────────────
   const selectedCountry =
     mode === 'Learn' && selectedCountryId
       ? getCountryByIsoNumeric(selectedCountryId)
       : null
 
+  const quizLaunched = mode === 'Quiz' && quizOptions !== null
+  const qqLaunched = mode === 'Quick Quiz' && qqOptions !== null
+
+  const activeHighlights = quizLaunched
+    ? quiz.highlights
+    : qqLaunched
+      ? quickQuiz.highlights
+      : null
+
+  // ── Handlers ──────────────────────────────────────────────────────────────
   const handleCountryClick = (isoNumeric) => {
     if (mode === 'Learn') {
       setSelectedCountryId(isoNumeric === selectedCountryId ? null : isoNumeric)
     } else if (mode === 'Quiz' && quizOptions && quizOptions.direction !== 'map-to-name') {
       quiz.handleCountryClick(isoNumeric)
+    } else if (mode === 'Quick Quiz' && qqOptions && qqOptions.direction !== 'map-to-name') {
+      quickQuiz.handleCountryClick(isoNumeric)
     }
   }
 
@@ -43,20 +136,30 @@ export default function App() {
   const handleModeChange = (m) => {
     setMode(m)
     setSelectedCountryId(null)
-    setQuizOptions(null) // reset launcher when switching away
+    setQuizOptions(null)
+    setQqOptions(null)
   }
 
   const handleStartQuiz = (options) => {
-    // Setting new options triggers useMemo → new array reference → useQuiz restarts
     setQuizOptions({ ...options })
   }
 
   const handleRestartQuiz = () => {
-    // Force a new array reference so useQuiz re-shuffles
     setQuizOptions((prev) => ({ ...prev }))
   }
 
-  const quizLaunched = mode === 'Quiz' && quizOptions !== null
+  const handleStartQQ = (options) => {
+    setQqOptions({ ...options })
+  }
+
+  const handleRestartQQ = () => {
+    // Force new object ref so qqCountries useMemo re-runs with a fresh shuffle
+    setQqOptions((prev) => ({ ...prev }))
+  }
+
+  const handleQQChangeSettings = () => {
+    setQqOptions(null)
+  }
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#0a0f1a]">
@@ -74,9 +177,7 @@ export default function App() {
                 mode === m
                   ? 'bg-blue-600 text-white'
                   : 'text-white/50 hover:text-white/80 hover:bg-white/5',
-                m === 'Quick Quiz' ? 'opacity-40 cursor-not-allowed' : '',
               ].join(' ')}
-              disabled={m === 'Quick Quiz'}
             >
               {m}
             </button>
@@ -91,7 +192,7 @@ export default function App() {
           selectedCountryId={selectedCountryId}
           onCountryClick={handleCountryClick}
           onBackgroundClick={handleMapBackground}
-          quizHighlights={quizLaunched ? quiz.highlights : null}
+          quizHighlights={activeHighlights}
         />
 
         {/* Learn Mode: scorecard panel */}
@@ -120,6 +221,38 @@ export default function App() {
             onNext={quiz.handleNext}
             onTextSubmit={quiz.handleTextSubmit}
             onRestart={handleRestartQuiz}
+          />
+        )}
+
+        {/* Quick Quiz Mode: launcher → gameplay → results */}
+        {mode === 'Quick Quiz' && !qqLaunched && (
+          <QuickQuizLauncher onStart={handleStartQQ} />
+        )}
+
+        {mode === 'Quick Quiz' && qqLaunched && quickQuiz.phase !== 'complete' && (
+          <QuizOverlay
+            direction={qqOptions.direction ?? 'name-to-map'}
+            currentCountry={quickQuiz.currentCountry}
+            phase={quickQuiz.phase}
+            score={quickQuiz.score}
+            position={quickQuiz.position}
+            clickedCountry={quickQuiz.clickedCountry}
+            typedAnswer={quickQuiz.typedAnswer}
+            wrongList={quickQuiz.wrongList}
+            onNext={quickQuiz.handleNext}
+            onTextSubmit={quickQuiz.handleTextSubmit}
+            onRestart={handleQQChangeSettings}
+          />
+        )}
+
+        {mode === 'Quick Quiz' && qqLaunched && quickQuiz.phase === 'complete' && (
+          <QuickQuizResults
+            score={quickQuiz.score}
+            total={quickQuiz.position.total}
+            wrongList={quickQuiz.wrongList}
+            elapsedSeconds={qqElapsedSeconds}
+            onPlayAgain={handleRestartQQ}
+            onChangeSettings={handleQQChangeSettings}
           />
         )}
       </div>

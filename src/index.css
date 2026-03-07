@@ -69,3 +69,13 @@
   fill: #1a2740;
   stroke: #4d7ab0;
 }
+
+/* ── Data tab: hide spinner arrows on numeric range inputs ── */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}

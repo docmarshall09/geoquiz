@@ -1,0 +1,1929 @@
+{
+  "_metadata": {
+    "description": "Complete supplemental data for GeoQuiz countries.json",
+    "sources": {
+      "hdi": "UNDP Human Development Report 2025 (2023 data)",
+      "travel_advisory": "US State Department Travel Advisories (early 2025 baseline)",
+      "sovereignty": "Britannica, CIA World Factbook, Wikipedia decolonization sources"
+    },
+    "field_definitions": {
+      "hdi": "Human Development Index value (0-1). Very High: 0.800+, High: 0.700-0.799, Medium: 0.550-0.699, Low: <0.550",
+      "hdi_rank": "Global HDI ranking (1-193)",
+      "travel_advisory": "US State Dept level (1-4). 1=Exercise Normal Precautions, 2=Exercise Increased Caution, 3=Reconsider Travel, 4=Do Not Travel. Territory ratings inherit parent country level.",
+      "independence_year": "Year of independence/formation. Negative values = BCE.",
+      "independence_from": "Colonial/imperial power or predecessor state. null for ancient/formation countries.",
+      "sovereignty_type": "How the country achieved sovereignty. Values: Ancient, Colonial, Post-Soviet, Post-Ottoman, Secession, Reunification, Mandate/Protectorate, Post-Yugoslav, Merger, Settlement, Never Colonized"
+    },
+    "tooltip_text": {
+      "hdi": "Human Development Index (UNDP) — composite measure of life expectancy, education, and standard of living. Scale: 0 to 1. Very High: 0.800+, High: 0.700-0.799, Medium: 0.550-0.699, Low: below 0.550.",
+      "travel_advisory": "US State Department Travel Advisory (1-4). Level 1 = Exercise Normal Precautions. Level 2 = Exercise Increased Caution. Level 3 = Reconsider Travel. Level 4 = Do Not Travel. Territory ratings inherit their parent country advisory level. Levels are point-in-time and can change.",
+      "sovereignty_type": "How the country achieved its current sovereignty. Ancient = continuous sovereignty since antiquity. Colonial = independence from a European colonial power. Post-Soviet = emerged from USSR dissolution. Post-Ottoman = emerged from Ottoman Empire collapse. Secession = broke away from a modern state. Reunification = unified from previously divided states. Mandate/Protectorate = League of Nations or UN administered pathway to independence. Post-Yugoslav = emerged from Yugoslavia dissolution. Merger = formed by merging existing states. Settlement = founded by settlers. Never Colonized = maintained independence through the colonial era."
+    }
+  },
+  "countries": {
+    "Afghanistan": {
+      "hdi": 0.496,
+      "hdi_rank": 181,
+      "travel_advisory": 4,
+      "independence_year": 1919,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Albania": {
+      "hdi": 0.81,
+      "hdi_rank": 71,
+      "travel_advisory": 2,
+      "independence_year": 1912,
+      "independence_from": "Ottoman Empire",
+      "sovereignty_type": "Post-Ottoman"
+    },
+    "Algeria": {
+      "hdi": 0.763,
+      "hdi_rank": 96,
+      "travel_advisory": 2,
+      "independence_year": 1962,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Andorra": {
+      "hdi": 0.913,
+      "hdi_rank": 32,
+      "travel_advisory": 1,
+      "independence_year": 1278,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Angola": {
+      "hdi": 0.616,
+      "hdi_rank": 148,
+      "travel_advisory": 2,
+      "independence_year": 1975,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Colonial"
+    },
+    "Antigua and Barbuda": {
+      "hdi": 0.851,
+      "hdi_rank": 53,
+      "travel_advisory": 1,
+      "independence_year": 1981,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Argentina": {
+      "hdi": 0.865,
+      "hdi_rank": 47,
+      "travel_advisory": 1,
+      "independence_year": 1816,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Armenia": {
+      "hdi": 0.811,
+      "hdi_rank": 69,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Australia": {
+      "hdi": 0.958,
+      "hdi_rank": 7,
+      "travel_advisory": 1,
+      "independence_year": 1901,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Austria": {
+      "hdi": 0.93,
+      "hdi_rank": 22,
+      "travel_advisory": 2,
+      "independence_year": 1945,
+      "independence_from": "Allied occupation",
+      "sovereignty_type": "Reunification"
+    },
+    "Azerbaijan": {
+      "hdi": 0.789,
+      "hdi_rank": 81,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Bahamas": {
+      "hdi": 0.82,
+      "hdi_rank": 66,
+      "travel_advisory": 2,
+      "independence_year": 1973,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Bahrain": {
+      "hdi": 0.899,
+      "hdi_rank": 38,
+      "travel_advisory": 2,
+      "independence_year": 1971,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Bangladesh": {
+      "hdi": 0.685,
+      "hdi_rank": 130,
+      "travel_advisory": 3,
+      "independence_year": 1971,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Barbados": {
+      "hdi": 0.811,
+      "hdi_rank": 69,
+      "travel_advisory": 1,
+      "independence_year": 1966,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Belarus": {
+      "hdi": 0.824,
+      "hdi_rank": 65,
+      "travel_advisory": 4,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Belgium": {
+      "hdi": 0.951,
+      "hdi_rank": 10,
+      "travel_advisory": 2,
+      "independence_year": 1830,
+      "independence_from": "Netherlands",
+      "sovereignty_type": "Secession"
+    },
+    "Belize": {
+      "hdi": 0.721,
+      "hdi_rank": 115,
+      "travel_advisory": 2,
+      "independence_year": 1981,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Benin": {
+      "hdi": 0.515,
+      "hdi_rank": 173,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Bhutan": {
+      "hdi": 0.698,
+      "hdi_rank": 125,
+      "travel_advisory": 1,
+      "independence_year": 1907,
+      "independence_from": null,
+      "sovereignty_type": "Never Colonized"
+    },
+    "Bolivia": {
+      "hdi": 0.733,
+      "hdi_rank": 108,
+      "travel_advisory": 2,
+      "independence_year": 1825,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Bosnia and Herzegovina": {
+      "hdi": 0.804,
+      "hdi_rank": 74,
+      "travel_advisory": 2,
+      "independence_year": 1992,
+      "independence_from": "Yugoslavia",
+      "sovereignty_type": "Post-Yugoslav"
+    },
+    "Botswana": {
+      "hdi": 0.731,
+      "hdi_rank": 111,
+      "travel_advisory": 1,
+      "independence_year": 1966,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Brazil": {
+      "hdi": 0.786,
+      "hdi_rank": 84,
+      "travel_advisory": 2,
+      "independence_year": 1822,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Colonial"
+    },
+    "Brunei": {
+      "hdi": 0.837,
+      "hdi_rank": 60,
+      "travel_advisory": 1,
+      "independence_year": 1984,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Bulgaria": {
+      "hdi": 0.845,
+      "hdi_rank": 55,
+      "travel_advisory": 1,
+      "independence_year": 1908,
+      "independence_from": "Ottoman Empire",
+      "sovereignty_type": "Post-Ottoman"
+    },
+    "Burkina Faso": {
+      "hdi": 0.459,
+      "hdi_rank": 186,
+      "travel_advisory": 4,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Burundi": {
+      "hdi": 0.439,
+      "hdi_rank": 187,
+      "travel_advisory": 3,
+      "independence_year": 1962,
+      "independence_from": "Belgium",
+      "sovereignty_type": "Colonial"
+    },
+    "Cabo Verde": {
+      "hdi": 0.668,
+      "hdi_rank": 135,
+      "travel_advisory": 1,
+      "independence_year": 1975,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Colonial"
+    },
+    "Cambodia": {
+      "hdi": 0.606,
+      "hdi_rank": 151,
+      "travel_advisory": 2,
+      "independence_year": 1953,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Cameroon": {
+      "hdi": 0.588,
+      "hdi_rank": 155,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Canada": {
+      "hdi": 0.939,
+      "hdi_rank": 16,
+      "travel_advisory": 1,
+      "independence_year": 1867,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Central African Republic": {
+      "hdi": 0.414,
+      "hdi_rank": 191,
+      "travel_advisory": 4,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Chad": {
+      "hdi": 0.416,
+      "hdi_rank": 190,
+      "travel_advisory": 3,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Chile": {
+      "hdi": 0.878,
+      "hdi_rank": 45,
+      "travel_advisory": 2,
+      "independence_year": 1818,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "China": {
+      "hdi": 0.797,
+      "hdi_rank": 78,
+      "travel_advisory": 2,
+      "independence_year": -221,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Colombia": {
+      "hdi": 0.788,
+      "hdi_rank": 83,
+      "travel_advisory": 3,
+      "independence_year": 1810,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Comoros": {
+      "hdi": 0.603,
+      "hdi_rank": 152,
+      "travel_advisory": 2,
+      "independence_year": 1975,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Congo": {
+      "hdi": 0.649,
+      "hdi_rank": 138,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Democratic Republic of the Congo": {
+      "hdi": 0.522,
+      "hdi_rank": 171,
+      "travel_advisory": 4,
+      "independence_year": 1960,
+      "independence_from": "Belgium",
+      "sovereignty_type": "Colonial"
+    },
+    "Costa Rica": {
+      "hdi": 0.833,
+      "hdi_rank": 62,
+      "travel_advisory": 2,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Côte d'Ivoire": {
+      "hdi": 0.582,
+      "hdi_rank": 157,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Croatia": {
+      "hdi": 0.889,
+      "hdi_rank": 41,
+      "travel_advisory": 1,
+      "independence_year": 1991,
+      "independence_from": "Yugoslavia",
+      "sovereignty_type": "Post-Yugoslav"
+    },
+    "Cuba": {
+      "hdi": 0.762,
+      "hdi_rank": 97,
+      "travel_advisory": 2,
+      "independence_year": 1902,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Cyprus": {
+      "hdi": 0.913,
+      "hdi_rank": 32,
+      "travel_advisory": 1,
+      "independence_year": 1960,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Czech Republic": {
+      "hdi": 0.915,
+      "hdi_rank": 29,
+      "travel_advisory": 1,
+      "independence_year": 1993,
+      "independence_from": "Czechoslovakia",
+      "sovereignty_type": "Secession"
+    },
+    "Denmark": {
+      "hdi": 0.962,
+      "hdi_rank": 4,
+      "travel_advisory": 2,
+      "independence_year": 965,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Djibouti": {
+      "hdi": 0.513,
+      "hdi_rank": 175,
+      "travel_advisory": 2,
+      "independence_year": 1977,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Dominica": {
+      "hdi": 0.761,
+      "hdi_rank": 98,
+      "travel_advisory": 1,
+      "independence_year": 1978,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Dominican Republic": {
+      "hdi": 0.776,
+      "hdi_rank": 89,
+      "travel_advisory": 2,
+      "independence_year": 1844,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Ecuador": {
+      "hdi": 0.777,
+      "hdi_rank": 88,
+      "travel_advisory": 2,
+      "independence_year": 1822,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Egypt": {
+      "hdi": 0.754,
+      "hdi_rank": 100,
+      "travel_advisory": 3,
+      "independence_year": 1922,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "El Salvador": {
+      "hdi": 0.678,
+      "hdi_rank": 132,
+      "travel_advisory": 2,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Equatorial Guinea": {
+      "hdi": 0.674,
+      "hdi_rank": 133,
+      "travel_advisory": 2,
+      "independence_year": 1968,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Eritrea": {
+      "hdi": 0.503,
+      "hdi_rank": 178,
+      "travel_advisory": 2,
+      "independence_year": 1993,
+      "independence_from": "Ethiopia",
+      "sovereignty_type": "Secession"
+    },
+    "Estonia": {
+      "hdi": 0.905,
+      "hdi_rank": 36,
+      "travel_advisory": 1,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Eswatini": {
+      "hdi": 0.695,
+      "hdi_rank": 126,
+      "travel_advisory": 2,
+      "independence_year": 1968,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Ethiopia": {
+      "hdi": 0.497,
+      "hdi_rank": 180,
+      "travel_advisory": 2,
+      "independence_year": -980,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Fiji": {
+      "hdi": 0.731,
+      "hdi_rank": 111,
+      "travel_advisory": 2,
+      "independence_year": 1970,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Finland": {
+      "hdi": 0.948,
+      "hdi_rank": 12,
+      "travel_advisory": 1,
+      "independence_year": 1917,
+      "independence_from": "Russia",
+      "sovereignty_type": "Secession"
+    },
+    "France": {
+      "hdi": 0.92,
+      "hdi_rank": 26,
+      "travel_advisory": 2,
+      "independence_year": 843,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Gabon": {
+      "hdi": 0.733,
+      "hdi_rank": 108,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Gambia": {
+      "hdi": 0.524,
+      "hdi_rank": 170,
+      "travel_advisory": 2,
+      "independence_year": 1965,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Georgia": {
+      "hdi": 0.844,
+      "hdi_rank": 57,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Germany": {
+      "hdi": 0.959,
+      "hdi_rank": 5,
+      "travel_advisory": 2,
+      "independence_year": 1990,
+      "independence_from": null,
+      "sovereignty_type": "Reunification"
+    },
+    "Ghana": {
+      "hdi": 0.628,
+      "hdi_rank": 143,
+      "travel_advisory": 2,
+      "independence_year": 1957,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Greece": {
+      "hdi": 0.908,
+      "hdi_rank": 34,
+      "travel_advisory": 1,
+      "independence_year": 1829,
+      "independence_from": "Ottoman Empire",
+      "sovereignty_type": "Post-Ottoman"
+    },
+    "Grenada": {
+      "hdi": 0.791,
+      "hdi_rank": 80,
+      "travel_advisory": 1,
+      "independence_year": 1974,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Guatemala": {
+      "hdi": 0.662,
+      "hdi_rank": 137,
+      "travel_advisory": 3,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Guinea": {
+      "hdi": 0.5,
+      "hdi_rank": 179,
+      "travel_advisory": 3,
+      "independence_year": 1958,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Guinea-Bissau": {
+      "hdi": 0.514,
+      "hdi_rank": 174,
+      "travel_advisory": 3,
+      "independence_year": 1973,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Colonial"
+    },
+    "Guyana": {
+      "hdi": 0.776,
+      "hdi_rank": 89,
+      "travel_advisory": 3,
+      "independence_year": 1966,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Haiti": {
+      "hdi": 0.554,
+      "hdi_rank": 166,
+      "travel_advisory": 4,
+      "independence_year": 1804,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Honduras": {
+      "hdi": 0.645,
+      "hdi_rank": 139,
+      "travel_advisory": 3,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Hungary": {
+      "hdi": 0.87,
+      "hdi_rank": 46,
+      "travel_advisory": 1,
+      "independence_year": 1000,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Iceland": {
+      "hdi": 0.972,
+      "hdi_rank": 1,
+      "travel_advisory": 1,
+      "independence_year": 1944,
+      "independence_from": "Denmark",
+      "sovereignty_type": "Secession"
+    },
+    "India": {
+      "hdi": 0.685,
+      "hdi_rank": 130,
+      "travel_advisory": 2,
+      "independence_year": 1947,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Indonesia": {
+      "hdi": 0.728,
+      "hdi_rank": 113,
+      "travel_advisory": 2,
+      "independence_year": 1945,
+      "independence_from": "Netherlands",
+      "sovereignty_type": "Colonial"
+    },
+    "Iran": {
+      "hdi": 0.799,
+      "hdi_rank": 75,
+      "travel_advisory": 4,
+      "independence_year": -550,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Iraq": {
+      "hdi": 0.695,
+      "hdi_rank": 126,
+      "travel_advisory": 4,
+      "independence_year": 1932,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Ireland": {
+      "hdi": 0.949,
+      "hdi_rank": 11,
+      "travel_advisory": 1,
+      "independence_year": 1922,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Secession"
+    },
+    "Israel": {
+      "hdi": 0.919,
+      "hdi_rank": 27,
+      "travel_advisory": 2,
+      "independence_year": 1948,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Italy": {
+      "hdi": 0.915,
+      "hdi_rank": 29,
+      "travel_advisory": 2,
+      "independence_year": 1861,
+      "independence_from": null,
+      "sovereignty_type": "Reunification"
+    },
+    "Jamaica": {
+      "hdi": 0.72,
+      "hdi_rank": 117,
+      "travel_advisory": 3,
+      "independence_year": 1962,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Japan": {
+      "hdi": 0.925,
+      "hdi_rank": 23,
+      "travel_advisory": 1,
+      "independence_year": -660,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Jordan": {
+      "hdi": 0.754,
+      "hdi_rank": 100,
+      "travel_advisory": 2,
+      "independence_year": 1946,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Kazakhstan": {
+      "hdi": 0.837,
+      "hdi_rank": 60,
+      "travel_advisory": 1,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Kenya": {
+      "hdi": 0.628,
+      "hdi_rank": 143,
+      "travel_advisory": 2,
+      "independence_year": 1963,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Kiribati": {
+      "hdi": 0.644,
+      "hdi_rank": 140,
+      "travel_advisory": 1,
+      "independence_year": 1979,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "North Korea": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 4,
+      "independence_year": 1948,
+      "independence_from": "Japan",
+      "sovereignty_type": "Colonial"
+    },
+    "South Korea": {
+      "hdi": 0.937,
+      "hdi_rank": 20,
+      "travel_advisory": 1,
+      "independence_year": 1948,
+      "independence_from": "Japan",
+      "sovereignty_type": "Colonial"
+    },
+    "Kuwait": {
+      "hdi": 0.852,
+      "hdi_rank": 52,
+      "travel_advisory": 2,
+      "independence_year": 1961,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Kyrgyzstan": {
+      "hdi": 0.72,
+      "hdi_rank": 117,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Laos": {
+      "hdi": 0.617,
+      "hdi_rank": 147,
+      "travel_advisory": 2,
+      "independence_year": 1953,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Latvia": {
+      "hdi": 0.889,
+      "hdi_rank": 41,
+      "travel_advisory": 1,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Lebanon": {
+      "hdi": 0.752,
+      "hdi_rank": 102,
+      "travel_advisory": 4,
+      "independence_year": 1943,
+      "independence_from": "France",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Lesotho": {
+      "hdi": 0.55,
+      "hdi_rank": 167,
+      "travel_advisory": 2,
+      "independence_year": 1966,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Liberia": {
+      "hdi": 0.51,
+      "hdi_rank": 177,
+      "travel_advisory": 2,
+      "independence_year": 1847,
+      "independence_from": null,
+      "sovereignty_type": "Settlement"
+    },
+    "Libya": {
+      "hdi": 0.721,
+      "hdi_rank": 115,
+      "travel_advisory": 4,
+      "independence_year": 1951,
+      "independence_from": "Italy",
+      "sovereignty_type": "Colonial"
+    },
+    "Liechtenstein": {
+      "hdi": 0.938,
+      "hdi_rank": 17,
+      "travel_advisory": 1,
+      "independence_year": 1719,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Lithuania": {
+      "hdi": 0.895,
+      "hdi_rank": 39,
+      "travel_advisory": 1,
+      "independence_year": 1990,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Luxembourg": {
+      "hdi": 0.922,
+      "hdi_rank": 25,
+      "travel_advisory": 1,
+      "independence_year": 1839,
+      "independence_from": "Netherlands",
+      "sovereignty_type": "Secession"
+    },
+    "Madagascar": {
+      "hdi": 0.487,
+      "hdi_rank": 183,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Malawi": {
+      "hdi": 0.517,
+      "hdi_rank": 172,
+      "travel_advisory": 2,
+      "independence_year": 1964,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Malaysia": {
+      "hdi": 0.819,
+      "hdi_rank": 67,
+      "travel_advisory": 2,
+      "independence_year": 1957,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Maldives": {
+      "hdi": 0.766,
+      "hdi_rank": 93,
+      "travel_advisory": 2,
+      "independence_year": 1965,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Mali": {
+      "hdi": 0.419,
+      "hdi_rank": 188,
+      "travel_advisory": 4,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Malta": {
+      "hdi": 0.924,
+      "hdi_rank": 24,
+      "travel_advisory": 1,
+      "independence_year": 1964,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Marshall Islands": {
+      "hdi": 0.733,
+      "hdi_rank": 108,
+      "travel_advisory": 1,
+      "independence_year": 1986,
+      "independence_from": "United States",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Mauritania": {
+      "hdi": 0.563,
+      "hdi_rank": 163,
+      "travel_advisory": 3,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Mauritius": {
+      "hdi": 0.806,
+      "hdi_rank": 73,
+      "travel_advisory": 1,
+      "independence_year": 1968,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Mexico": {
+      "hdi": 0.789,
+      "hdi_rank": 81,
+      "travel_advisory": 2,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Micronesia": {
+      "hdi": 0.615,
+      "hdi_rank": 149,
+      "travel_advisory": 1,
+      "independence_year": 1986,
+      "independence_from": "United States",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Moldova": {
+      "hdi": 0.785,
+      "hdi_rank": 86,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Monaco": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": 1297,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Mongolia": {
+      "hdi": 0.747,
+      "hdi_rank": 104,
+      "travel_advisory": 1,
+      "independence_year": 1921,
+      "independence_from": "China",
+      "sovereignty_type": "Secession"
+    },
+    "Montenegro": {
+      "hdi": 0.862,
+      "hdi_rank": 48,
+      "travel_advisory": 1,
+      "independence_year": 2006,
+      "independence_from": "Serbia and Montenegro",
+      "sovereignty_type": "Post-Yugoslav"
+    },
+    "Morocco": {
+      "hdi": 0.71,
+      "hdi_rank": 120,
+      "travel_advisory": 2,
+      "independence_year": 1956,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Mozambique": {
+      "hdi": 0.493,
+      "hdi_rank": 182,
+      "travel_advisory": 2,
+      "independence_year": 1975,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Colonial"
+    },
+    "Myanmar": {
+      "hdi": 0.609,
+      "hdi_rank": 150,
+      "travel_advisory": 4,
+      "independence_year": 1948,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Namibia": {
+      "hdi": 0.665,
+      "hdi_rank": 136,
+      "travel_advisory": 2,
+      "independence_year": 1990,
+      "independence_from": "South Africa",
+      "sovereignty_type": "Colonial"
+    },
+    "Nauru": {
+      "hdi": 0.703,
+      "hdi_rank": 124,
+      "travel_advisory": 2,
+      "independence_year": 1968,
+      "independence_from": "Australia",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Nepal": {
+      "hdi": 0.622,
+      "hdi_rank": 145,
+      "travel_advisory": 2,
+      "independence_year": 1768,
+      "independence_from": null,
+      "sovereignty_type": "Never Colonized"
+    },
+    "Netherlands": {
+      "hdi": 0.955,
+      "hdi_rank": 8,
+      "travel_advisory": 2,
+      "independence_year": 1581,
+      "independence_from": "Spain",
+      "sovereignty_type": "Secession"
+    },
+    "New Zealand": {
+      "hdi": 0.938,
+      "hdi_rank": 17,
+      "travel_advisory": 1,
+      "independence_year": 1907,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Nicaragua": {
+      "hdi": 0.706,
+      "hdi_rank": 123,
+      "travel_advisory": 2,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Niger": {
+      "hdi": 0.419,
+      "hdi_rank": 188,
+      "travel_advisory": 4,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Nigeria": {
+      "hdi": 0.56,
+      "hdi_rank": 164,
+      "travel_advisory": 3,
+      "independence_year": 1960,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "North Macedonia": {
+      "hdi": 0.815,
+      "hdi_rank": 68,
+      "travel_advisory": 1,
+      "independence_year": 1991,
+      "independence_from": "Yugoslavia",
+      "sovereignty_type": "Post-Yugoslav"
+    },
+    "Norway": {
+      "hdi": 0.97,
+      "hdi_rank": 2,
+      "travel_advisory": 1,
+      "independence_year": 1905,
+      "independence_from": "Sweden",
+      "sovereignty_type": "Secession"
+    },
+    "Oman": {
+      "hdi": 0.858,
+      "hdi_rank": 50,
+      "travel_advisory": 2,
+      "independence_year": 1650,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Never Colonized"
+    },
+    "Pakistan": {
+      "hdi": 0.544,
+      "hdi_rank": 168,
+      "travel_advisory": 3,
+      "independence_year": 1947,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Palau": {
+      "hdi": 0.786,
+      "hdi_rank": 84,
+      "travel_advisory": 1,
+      "independence_year": 1994,
+      "independence_from": "United States",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Palestine": {
+      "hdi": 0.674,
+      "hdi_rank": 133,
+      "travel_advisory": 4,
+      "independence_year": 1988,
+      "independence_from": "Israel",
+      "sovereignty_type": "Secession"
+    },
+    "Panama": {
+      "hdi": 0.839,
+      "hdi_rank": 59,
+      "travel_advisory": 2,
+      "independence_year": 1903,
+      "independence_from": "Colombia",
+      "sovereignty_type": "Secession"
+    },
+    "Papua New Guinea": {
+      "hdi": 0.576,
+      "hdi_rank": 160,
+      "travel_advisory": 3,
+      "independence_year": 1975,
+      "independence_from": "Australia",
+      "sovereignty_type": "Colonial"
+    },
+    "Paraguay": {
+      "hdi": 0.756,
+      "hdi_rank": 99,
+      "travel_advisory": 1,
+      "independence_year": 1811,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Peru": {
+      "hdi": 0.794,
+      "hdi_rank": 79,
+      "travel_advisory": 2,
+      "independence_year": 1821,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Philippines": {
+      "hdi": 0.72,
+      "hdi_rank": 117,
+      "travel_advisory": 2,
+      "independence_year": 1946,
+      "independence_from": "United States",
+      "sovereignty_type": "Colonial"
+    },
+    "Poland": {
+      "hdi": 0.906,
+      "hdi_rank": 35,
+      "travel_advisory": 1,
+      "independence_year": 1918,
+      "independence_from": null,
+      "sovereignty_type": "Reunification"
+    },
+    "Portugal": {
+      "hdi": 0.89,
+      "hdi_rank": 40,
+      "travel_advisory": 1,
+      "independence_year": 1143,
+      "independence_from": "Spain",
+      "sovereignty_type": "Ancient"
+    },
+    "Qatar": {
+      "hdi": 0.886,
+      "hdi_rank": 43,
+      "travel_advisory": 2,
+      "independence_year": 1971,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Romania": {
+      "hdi": 0.845,
+      "hdi_rank": 55,
+      "travel_advisory": 1,
+      "independence_year": 1877,
+      "independence_from": "Ottoman Empire",
+      "sovereignty_type": "Post-Ottoman"
+    },
+    "Russia": {
+      "hdi": 0.832,
+      "hdi_rank": 64,
+      "travel_advisory": 4,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Rwanda": {
+      "hdi": 0.578,
+      "hdi_rank": 159,
+      "travel_advisory": 2,
+      "independence_year": 1962,
+      "independence_from": "Belgium",
+      "sovereignty_type": "Colonial"
+    },
+    "Saint Kitts and Nevis": {
+      "hdi": 0.84,
+      "hdi_rank": 58,
+      "travel_advisory": 1,
+      "independence_year": 1983,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Saint Lucia": {
+      "hdi": 0.748,
+      "hdi_rank": 103,
+      "travel_advisory": 1,
+      "independence_year": 1979,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Saint Vincent and the Grenadines": {
+      "hdi": 0.798,
+      "hdi_rank": 76,
+      "travel_advisory": 1,
+      "independence_year": 1979,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Samoa": {
+      "hdi": 0.708,
+      "hdi_rank": 122,
+      "travel_advisory": 2,
+      "independence_year": 1962,
+      "independence_from": "New Zealand",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "San Marino": {
+      "hdi": 0.915,
+      "hdi_rank": 29,
+      "travel_advisory": 1,
+      "independence_year": 301,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "São Tomé and Príncipe": {
+      "hdi": 0.637,
+      "hdi_rank": 141,
+      "travel_advisory": 1,
+      "independence_year": 1975,
+      "independence_from": "Portugal",
+      "sovereignty_type": "Colonial"
+    },
+    "Saudi Arabia": {
+      "hdi": 0.9,
+      "hdi_rank": 37,
+      "travel_advisory": 2,
+      "independence_year": 1932,
+      "independence_from": null,
+      "sovereignty_type": "Never Colonized"
+    },
+    "Senegal": {
+      "hdi": 0.53,
+      "hdi_rank": 169,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Serbia": {
+      "hdi": 0.833,
+      "hdi_rank": 62,
+      "travel_advisory": 2,
+      "independence_year": 2006,
+      "independence_from": "Serbia and Montenegro",
+      "sovereignty_type": "Post-Yugoslav"
+    },
+    "Seychelles": {
+      "hdi": 0.848,
+      "hdi_rank": 54,
+      "travel_advisory": 1,
+      "independence_year": 1976,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Sierra Leone": {
+      "hdi": 0.467,
+      "hdi_rank": 185,
+      "travel_advisory": 2,
+      "independence_year": 1961,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Singapore": {
+      "hdi": 0.946,
+      "hdi_rank": 13,
+      "travel_advisory": 1,
+      "independence_year": 1965,
+      "independence_from": "Malaysia",
+      "sovereignty_type": "Secession"
+    },
+    "Slovakia": {
+      "hdi": 0.88,
+      "hdi_rank": 44,
+      "travel_advisory": 1,
+      "independence_year": 1993,
+      "independence_from": "Czechoslovakia",
+      "sovereignty_type": "Secession"
+    },
+    "Slovenia": {
+      "hdi": 0.931,
+      "hdi_rank": 21,
+      "travel_advisory": 1,
+      "independence_year": 1991,
+      "independence_from": "Yugoslavia",
+      "sovereignty_type": "Post-Yugoslav"
+    },
+    "Solomon Islands": {
+      "hdi": 0.584,
+      "hdi_rank": 156,
+      "travel_advisory": 2,
+      "independence_year": 1978,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Somalia": {
+      "hdi": 0.404,
+      "hdi_rank": 192,
+      "travel_advisory": 4,
+      "independence_year": 1960,
+      "independence_from": "United Kingdom/Italy",
+      "sovereignty_type": "Colonial"
+    },
+    "South Africa": {
+      "hdi": 0.741,
+      "hdi_rank": 106,
+      "travel_advisory": 2,
+      "independence_year": 1910,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "South Sudan": {
+      "hdi": 0.388,
+      "hdi_rank": 193,
+      "travel_advisory": 4,
+      "independence_year": 2011,
+      "independence_from": "Sudan",
+      "sovereignty_type": "Secession"
+    },
+    "Spain": {
+      "hdi": 0.918,
+      "hdi_rank": 28,
+      "travel_advisory": 2,
+      "independence_year": 1479,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Sri Lanka": {
+      "hdi": 0.776,
+      "hdi_rank": 89,
+      "travel_advisory": 2,
+      "independence_year": 1948,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Sudan": {
+      "hdi": 0.511,
+      "hdi_rank": 176,
+      "travel_advisory": 4,
+      "independence_year": 1956,
+      "independence_from": "United Kingdom/Egypt",
+      "sovereignty_type": "Colonial"
+    },
+    "Suriname": {
+      "hdi": 0.722,
+      "hdi_rank": 114,
+      "travel_advisory": 2,
+      "independence_year": 1975,
+      "independence_from": "Netherlands",
+      "sovereignty_type": "Colonial"
+    },
+    "Sweden": {
+      "hdi": 0.959,
+      "hdi_rank": 5,
+      "travel_advisory": 2,
+      "independence_year": 1523,
+      "independence_from": "Denmark",
+      "sovereignty_type": "Secession"
+    },
+    "Switzerland": {
+      "hdi": 0.97,
+      "hdi_rank": 2,
+      "travel_advisory": 1,
+      "independence_year": 1291,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "Syria": {
+      "hdi": 0.564,
+      "hdi_rank": 162,
+      "travel_advisory": 4,
+      "independence_year": 1946,
+      "independence_from": "France",
+      "sovereignty_type": "Mandate/Protectorate"
+    },
+    "Tajikistan": {
+      "hdi": 0.691,
+      "hdi_rank": 128,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Tanzania": {
+      "hdi": 0.555,
+      "hdi_rank": 165,
+      "travel_advisory": 2,
+      "independence_year": 1961,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Thailand": {
+      "hdi": 0.798,
+      "hdi_rank": 76,
+      "travel_advisory": 2,
+      "independence_year": 1238,
+      "independence_from": null,
+      "sovereignty_type": "Never Colonized"
+    },
+    "Timor-Leste": {
+      "hdi": 0.634,
+      "hdi_rank": 142,
+      "travel_advisory": 2,
+      "independence_year": 2002,
+      "independence_from": "Indonesia",
+      "sovereignty_type": "Secession"
+    },
+    "Togo": {
+      "hdi": 0.571,
+      "hdi_rank": 161,
+      "travel_advisory": 2,
+      "independence_year": 1960,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Tonga": {
+      "hdi": 0.769,
+      "hdi_rank": 92,
+      "travel_advisory": 1,
+      "independence_year": 1970,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Trinidad and Tobago": {
+      "hdi": 0.807,
+      "hdi_rank": 72,
+      "travel_advisory": 3,
+      "independence_year": 1962,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Tunisia": {
+      "hdi": 0.746,
+      "hdi_rank": 105,
+      "travel_advisory": 2,
+      "independence_year": 1956,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Turkey": {
+      "hdi": 0.853,
+      "hdi_rank": 51,
+      "travel_advisory": 2,
+      "independence_year": 1923,
+      "independence_from": "Ottoman Empire",
+      "sovereignty_type": "Post-Ottoman"
+    },
+    "Turkmenistan": {
+      "hdi": 0.764,
+      "hdi_rank": 95,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Tuvalu": {
+      "hdi": 0.689,
+      "hdi_rank": 129,
+      "travel_advisory": 1,
+      "independence_year": 1978,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Uganda": {
+      "hdi": 0.582,
+      "hdi_rank": 157,
+      "travel_advisory": 3,
+      "independence_year": 1962,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Ukraine": {
+      "hdi": 0.779,
+      "hdi_rank": 87,
+      "travel_advisory": 4,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "United Arab Emirates": {
+      "hdi": 0.94,
+      "hdi_rank": 15,
+      "travel_advisory": 2,
+      "independence_year": 1971,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "United Kingdom": {
+      "hdi": 0.946,
+      "hdi_rank": 13,
+      "travel_advisory": 2,
+      "independence_year": 1066,
+      "independence_from": null,
+      "sovereignty_type": "Ancient"
+    },
+    "United States": {
+      "hdi": 0.938,
+      "hdi_rank": 17,
+      "travel_advisory": null,
+      "independence_year": 1776,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Uruguay": {
+      "hdi": 0.862,
+      "hdi_rank": 48,
+      "travel_advisory": 2,
+      "independence_year": 1825,
+      "independence_from": "Brazil",
+      "sovereignty_type": "Secession"
+    },
+    "Uzbekistan": {
+      "hdi": 0.74,
+      "hdi_rank": 107,
+      "travel_advisory": 2,
+      "independence_year": 1991,
+      "independence_from": "Soviet Union",
+      "sovereignty_type": "Post-Soviet"
+    },
+    "Vanuatu": {
+      "hdi": 0.621,
+      "hdi_rank": 146,
+      "travel_advisory": 2,
+      "independence_year": 1980,
+      "independence_from": "United Kingdom/France",
+      "sovereignty_type": "Colonial"
+    },
+    "Vatican City": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": 1929,
+      "independence_from": "Italy",
+      "sovereignty_type": "Secession"
+    },
+    "Venezuela": {
+      "hdi": 0.709,
+      "hdi_rank": 121,
+      "travel_advisory": 4,
+      "independence_year": 1811,
+      "independence_from": "Spain",
+      "sovereignty_type": "Colonial"
+    },
+    "Vietnam": {
+      "hdi": 0.766,
+      "hdi_rank": 93,
+      "travel_advisory": 1,
+      "independence_year": 1945,
+      "independence_from": "France",
+      "sovereignty_type": "Colonial"
+    },
+    "Yemen": {
+      "hdi": 0.47,
+      "hdi_rank": 184,
+      "travel_advisory": 4,
+      "independence_year": 1990,
+      "independence_from": null,
+      "sovereignty_type": "Merger"
+    },
+    "Zambia": {
+      "hdi": 0.595,
+      "hdi_rank": 154,
+      "travel_advisory": 2,
+      "independence_year": 1964,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Zimbabwe": {
+      "hdi": 0.598,
+      "hdi_rank": 153,
+      "travel_advisory": 2,
+      "independence_year": 1980,
+      "independence_from": "United Kingdom",
+      "sovereignty_type": "Colonial"
+    },
+    "Kosovo": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": 2008,
+      "independence_from": "Serbia",
+      "sovereignty_type": "Secession"
+    },
+    "American Samoa": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": null,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Anguilla": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Aruba": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Bermuda": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "British Virgin Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Cayman Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Cook Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Curaçao": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Falkland Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Faroe Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "French Guiana": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "French Polynesia": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "French Southern Territories": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Gibraltar": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Greenland": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Guadeloupe": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Guam": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": null,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Hong Kong": {
+      "hdi": 0.955,
+      "hdi_rank": 8,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Isle of Man": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Jersey": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Macau": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Martinique": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Mayotte": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Montserrat": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "New Caledonia": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Niue": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Norfolk Island": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Northern Mariana Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": null,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Pitcairn Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Puerto Rico": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": null,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Réunion": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Saint Helena": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Saint Pierre and Miquelon": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Sint Maarten": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "South Georgia": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Svalbard": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Taiwan": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Tokelau": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 1,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Turks and Caicos Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "U.S. Virgin Islands": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": null,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Wallis and Futuna": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    },
+    "Western Sahara": {
+      "hdi": null,
+      "hdi_rank": null,
+      "travel_advisory": 2,
+      "independence_year": null,
+      "independence_from": null,
+      "sovereignty_type": null
+    }
+  }
+}

@@ -5,11 +5,12 @@ import QuizOverlay from './components/Quiz/QuizOverlay'
 import QuizLauncher from './components/Quiz/QuizLauncher'
 import QuickQuizLauncher from './components/QuickQuiz/QuickQuizLauncher'
 import QuickQuizResults from './components/QuickQuiz/QuickQuizResults'
+import DataTab from './components/DataTab/DataTab'
 import { getCountryByIsoNumeric, getFilteredCountries } from './utils/countryData'
 import { useQuiz } from './hooks/useQuiz'
 import { useProgress } from './hooks/useProgress'
 
-const MODES = ['Learn', 'Quiz', 'Quick Quiz']
+const MODES = ['Learn', 'Quiz', 'Quick Quiz', 'Data']
 const QQ_COUNT = 10
 const MIN_ATTEMPTS = 5
 
@@ -185,7 +186,15 @@ export default function App() {
         </nav>
       </div>
 
-      {/* Map + overlay layer */}
+      {/* Data tab — full-height, no map */}
+      {mode === 'Data' && (
+        <div style={{ height: 'calc(100vh - 60px)' }}>
+          <DataTab />
+        </div>
+      )}
+
+      {/* Map + overlay layer (hidden when Data tab is active) */}
+      {mode !== 'Data' && (
       <div className="relative" style={{ height: 'calc(100vh - 60px)' }}>
         <Map
           mode={mode}
@@ -256,6 +265,7 @@ export default function App() {
           />
         )}
       </div>
+      )}
     </div>
   )
 }

@@ -36,12 +36,18 @@ const MIN_TARGET_R = 8
 const ZOOM_EXTENT = [1, 20]
 const MAP_PADDING = 20
 
+// The SVG container starts at this offset from the viewport top (nav bar height).
+// Used to convert clientY → SVG-space Y when computing map-space click coords.
+const NAV_H = 60
+
 export default function Map({
   mode,
   selectedCountryId,
   onCountryClick,
   onBackgroundClick,
   quizHighlights,
+  dotMapCoords,   // [mx, my] in pre-transform SVG space, or null
+  cardCorners,    // [{x,y}×4] in container coords, or null
 }) {
   const svgRef = useRef(null)
 
@@ -55,6 +61,12 @@ export default function Map({
   const quizHighlightsRef = useRef(quizHighlights)
   const currentTransformRef = useRef(null) // latest zoom transform
   const updateMarkersRef = useRef(null)    // updateMarkers fn defined in D3 setup
+
+  // Annotation refs — dot + fan lines that track click point during zoom/pan
+  const dotMapCoordsRef = useRef(dotMapCoords)   // prop synced to ref
+  const cardCornersRef = useRef(cardCorners)      // prop synced to ref
+  const gAnnotationRef = useRef(null)             // D3 selection set in setup
+  const updateAnnotationRef = useRef(null)        // updateAnnotation fn set in setup
 
   // ── One-time D3 setup ──
   useEffect(() => {
@@ -125,7 +137,12 @@ export default function Map({
       .attr('data-id', (d) => d.id)
       .on('click', (event, d) => {
         event.stopPropagation()
-        onCountryClickRef.current?.(d.id, { x: event.clientX, y: event.clientY })
+        const T = currentTransformRef.current ?? d3.zoomIdentity
+        const mapPt = T.invert([event.clientX, event.clientY - NAV_H])
+        onCountryClickRef.current?.(d.id, {
+          screen: { x: event.clientX, y: event.clientY },
+          map: mapPt,
+        })
       })
 
     // Invisible large hit target — constant 20px in screen space
@@ -147,6 +164,52 @@ export default function Map({
 
     updateMarkers(d3.zoomIdentity)
 
+    // ── Annotation layer: click-dot + four fan lines ──
+    // Drawn above markers; updates imperatively on every zoom/pan frame.
+    const gAnnotation = svg.append('g')
+      .attr('class', 'map-annotation')
+      .style('pointer-events', 'none')
+      .style('transition', 'opacity 0.2s ease')
+      .style('opacity', 0)
+    gAnnotationRef.current = gAnnotation
+
+    // Four fan lines — one per card corner
+    for (let i = 0; i < 4; i++) {
+      gAnnotation.append('line')
+        .attr('class', 'annot-line')
+        .attr('stroke', 'rgba(130,175,245,0.28)')
+        .attr('stroke-width', 2)
+        .attr('x1', 0).attr('y1', 0)
+        .attr('x2', 0).attr('y2', 0)
+    }
+
+    // Dot at the click origin
+    gAnnotation.append('circle')
+      .attr('class', 'annot-dot')
+      .attr('r', 5.5)
+      .attr('fill', 'rgba(100,155,230,0.9)')
+      .attr('cx', 0).attr('cy', 0)
+
+    // Project the stored map-space dot through the current transform, update lines.
+    // Called from zoom handler (RAF-throttled) and whenever dotMapCoords/cardCorners change.
+    const updateAnnotation = (transform) => {
+      const mapPt = dotMapCoordsRef.current
+      const corners = cardCornersRef.current
+      if (!mapPt || !corners || corners.length !== 4) return
+
+      const [sx, sy] = transform.apply(mapPt)
+
+      gAnnotation.select('.annot-dot').attr('cx', sx).attr('cy', sy)
+
+      const lineNodes = gAnnotation.selectAll('.annot-line').nodes()
+      corners.forEach((c, i) => {
+        d3.select(lineNodes[i])
+          .attr('x1', sx).attr('y1', sy)
+          .attr('x2', c.x).attr('y2', c.y)
+      })
+    }
+    updateAnnotationRef.current = updateAnnotation
+
     // Zoom + pan
     // translateExtent([[0,0],[w,h]]) keeps the map filling the viewport at all
     // zoom levels: at k=1 no panning; at k=N can pan across the full world.
@@ -155,6 +218,7 @@ export default function Map({
     // transform must stay synchronous for a responsive feel, but the marker
     // repositioning (14 DOM writes across 7 elements) is throttled to one
     // update per animation frame (~60fps max) to avoid layout thrash.
+    // Annotation updates are included in the same RAF.
     let markerRafId = null
     const zoom = d3.zoom()
       .scaleExtent(ZOOM_EXTENT)
@@ -166,6 +230,7 @@ export default function Map({
           markerRafId = requestAnimationFrame(() => {
             markerRafId = null
             updateMarkersRef.current?.(currentTransformRef.current)
+            updateAnnotationRef.current?.(currentTransformRef.current)
           })
         }
       })
@@ -200,7 +265,13 @@ export default function Map({
         .on('click', (event, d) => {
           event.stopPropagation()
           const id = d.id !== undefined ? String(d.id) : d.properties?.name
-          if (id) onCountryClickRef.current?.(id, { x: event.clientX, y: event.clientY })
+          if (!id) return
+          const T = currentTransformRef.current ?? d3.zoomIdentity
+          const mapPt = T.invert([event.clientX, event.clientY - NAV_H])
+          onCountryClickRef.current?.(id, {
+            screen: { x: event.clientX, y: event.clientY },
+            map: mapPt,
+          })
         })
     })
 
@@ -218,6 +289,7 @@ export default function Map({
       g.selectAll('.country').attr('d', pathGen)
       svg.call(zoom.transform, d3.zoomIdentity)
       updateMarkers(d3.zoomIdentity)
+      updateAnnotationRef.current?.(d3.zoomIdentity)
     }
 
     window.addEventListener('resize', handleResize)
@@ -227,8 +299,48 @@ export default function Map({
       svgEl.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('mouseup', onMouseUp)
       svg.selectAll('*').remove()
+      gAnnotationRef.current = null
+      updateAnnotationRef.current = null
     }
   }, [])
+
+  // ── Sync dotMapCoords prop → ref; fade annotation in/out ──
+  // When a new click arrives: snap annotation to projected position, then fade in.
+  // When dismissed (null): fade out.
+  useEffect(() => {
+    dotMapCoordsRef.current = dotMapCoords
+    const gA = gAnnotationRef.current
+    if (!gA) return
+
+    // Reset to invisible immediately (snap, no transition artifact)
+    gA.style('opacity', 0)
+    if (!dotMapCoords) return
+
+    // Position dot + lines at the new location before fading in
+    if (updateAnnotationRef.current && currentTransformRef.current) {
+      updateAnnotationRef.current(currentTransformRef.current)
+    }
+
+    // Double-RAF: give browser one frame to commit geometry, then fade in
+    let cancelled = false
+    const r1 = requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!cancelled) gA.style('opacity', 1)
+      })
+    })
+    return () => {
+      cancelled = true
+      cancelAnimationFrame(r1)
+    }
+  }, [dotMapCoords])
+
+  // ── Sync cardCorners prop → ref; redraw lines to new corners ──
+  useEffect(() => {
+    cardCornersRef.current = cardCorners
+    if (updateAnnotationRef.current && currentTransformRef.current) {
+      updateAnnotationRef.current(currentTransformRef.current)
+    }
+  }, [cardCorners])
 
   // ── Apply all highlights: Learn selection + quiz feedback ──
   // Runs whenever selectedCountryId or quizHighlights changes.

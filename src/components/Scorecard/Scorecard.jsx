@@ -1,12 +1,15 @@
-// Country metadata scorecard — shown in Learn Mode as a map callout near the click point
+// Country metadata scorecard — shown in Learn Mode as a map callout near the click point.
+// The SVG dot + fan lines are drawn by Map.jsx so they track the map during zoom/pan.
+// Scorecard only renders the card; it writes its corner positions to App via onCornersChange.
 
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 
 const KM2_TO_MI2 = 0.386102
-const CARD_W = 340  // card pixel width
-const GAP = 28      // gap between click point and nearest card edge
-const EDGE = 10     // minimum margin from container edge
-const NAV_H = 60    // nav bar height — map container starts below this in the viewport
+const CARD_W = 340    // card pixel width
+const GAP = 28        // gap between click point and nearest card edge
+const EDGE = 10       // minimum margin from container edge
+const NAV_H = 60      // nav bar height — map container starts below this in the viewport
+const CORNER_INSET = 6 // inset line endpoints from geometric corners to match border-radius
 
 function fmtCurrency(n) { return n ? '$' + n.toLocaleString() : '—' }
 function fmtArea(km2) {
@@ -17,7 +20,7 @@ function fmtPop(n) { return (!n && n !== 0) ? '—' : n.toLocaleString() }
 
 /**
  * Compute card position in map-container coordinates.
- * cx/cy are already container-relative (viewport coords minus NAV_H offset for y).
+ * cx/cy are already container-relative (viewport coords minus NAV_H for y).
  * Prefers placing the card to the right of the click; falls back to left.
  * Centers vertically on click, clamped to container bounds.
  */
@@ -33,13 +36,12 @@ function computePos(cx, cy, cardH) {
   return { left, top }
 }
 
-export default function Scorecard({ country, clickCoords, onClose }) {
+export default function Scorecard({ country, clickCoords, onCornersChange, onClose }) {
   const cardRef = useRef(null)
-  const [pos, setPos] = useState(null)     // { left, top, cardH } in container coords
+  const [pos, setPos] = useState(null)      // { left, top, cardH } in container coords
   const [visible, setVisible] = useState(false)
 
-  // Convert viewport click coords to map-container coords.
-  // The SVG is absolute inset-0 inside the container (which starts at y=NAV_H in viewport).
+  // Container-relative click point (SVG/container origin = top of map container)
   const cx = clickCoords?.x ?? 0
   const cy = (clickCoords?.y ?? 0) - NAV_H
 
@@ -49,12 +51,21 @@ export default function Scorecard({ country, clickCoords, onClose }) {
     const cardH = cardRef.current.offsetHeight
     const { left, top } = computePos(cx, cy, cardH)
 
+    // Write the four card corners (inset for border-radius) to App.
+    // Map reads these to position its fan-line endpoints.
+    onCornersChange?.([
+      { x: left + CORNER_INSET,          y: top + CORNER_INSET           },
+      { x: left + CARD_W - CORNER_INSET, y: top + CORNER_INSET           },
+      { x: left + CORNER_INSET,          y: top + cardH - CORNER_INSET   },
+      { x: left + CARD_W - CORNER_INSET, y: top + cardH - CORNER_INSET   },
+    ])
+
     if (!pos) {
       // First appear: snap to position, then fade/scale in
       setPos({ left, top, cardH })
       requestAnimationFrame(() => requestAnimationFrame(() => setVisible(true)))
     } else {
-      // Country changed: animate to new position
+      // Country changed: animate card to new position
       setPos({ left, top, cardH })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -63,22 +74,15 @@ export default function Scorecard({ country, clickCoords, onClose }) {
   useEffect(() => {
     if (!country) {
       setVisible(false)
+      onCornersChange?.(null)
       const t = setTimeout(() => setPos(null), 220)
       return () => clearTimeout(t)
     }
-  }, [country])
+  }, [country, onCornersChange])
 
   if (!country) return null
 
-  // All four card corners for the fan lines (in container coords)
-  const corners = pos ? [
-    { x: pos.left,          y: pos.top             },
-    { x: pos.left + CARD_W, y: pos.top             },
-    { x: pos.left,          y: pos.top + pos.cardH },
-    { x: pos.left + CARD_W, y: pos.top + pos.cardH },
-  ] : []
-
-  // Nearest corner drives the scale-animation origin
+  // Nearest quadrant of click relative to card centre — drives scale-animation origin
   let txOrigin = 'center center'
   if (pos) {
     const oxWord = cx <= pos.left + CARD_W / 2 ? 'left' : 'right'
@@ -111,68 +115,43 @@ export default function Scorecard({ country, clickCoords, onClose }) {
   }
 
   return (
-    <>
-      {/* SVG fan lines + origin dot — above map, below card */}
-      <svg
-        className="absolute inset-0 pointer-events-none"
-        style={{ width: '100%', height: '100%', zIndex: 9, overflow: 'visible' }}
-      >
-        {corners.map((c, i) => (
-          <line
-            key={i}
-            x1={cx} y1={cy}
-            x2={c.x} y2={c.y}
-            stroke="rgba(130,175,245,0.2)"
-            strokeWidth={1}
-            style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.2s ease' }}
-          />
-        ))}
-        <circle
-          cx={cx} cy={cy} r={4.5}
-          fill="rgba(100,155,230,0.85)"
-          style={{ opacity: visible ? 1 : 0, transition: 'opacity 0.2s ease' }}
-        />
-      </svg>
-
-      {/* Card */}
-      <div ref={cardRef} style={cardStyle}>
-        {/* Header */}
-        <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-white/5">
-          <div className="flex items-center gap-3 min-w-0">
-            <span className="text-4xl leading-none shrink-0">{country.flag_emoji}</span>
-            <div className="min-w-0">
-              <h2 className="text-white font-bold text-lg leading-tight truncate">
-                {country.name}
-              </h2>
-              {country.official_name !== country.name && (
-                <p className="text-white/40 text-xs leading-tight mt-0.5 truncate">
-                  {country.official_name}
-                </p>
-              )}
-            </div>
+    <div ref={cardRef} style={cardStyle}>
+      {/* Header */}
+      <div className="flex items-start justify-between px-4 pt-4 pb-3 border-b border-white/5">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="text-4xl leading-none shrink-0">{country.flag_emoji}</span>
+          <div className="min-w-0">
+            <h2 className="text-white font-bold text-lg leading-tight truncate">
+              {country.name}
+            </h2>
+            {country.official_name !== country.name && (
+              <p className="text-white/40 text-xs leading-tight mt-0.5 truncate">
+                {country.official_name}
+              </p>
+            )}
           </div>
-          <button
-            onClick={onClose}
-            className="text-white/30 hover:text-white/70 transition-colors text-lg leading-none ml-2 shrink-0 mt-0.5"
-            aria-label="Close"
-          >
-            ✕
-          </button>
         </div>
-
-        {/* Fields */}
-        <div className="px-4 py-3 space-y-2.5">
-          <Row label="Capital"       value={country.capital || '—'} />
-          <Row label="Region"        value={country.region} />
-          <Row label="Population"    value={country.population ? fmtPop(country.population) : '—'} />
-          <Row label="Area"          value={fmtArea(country.area_km2)} />
-          <Row label="GDP per capita" value={fmtCurrency(country.gdp_ppp_per_capita)} />
-          {country.is_territory && (
-            <p className="text-xs text-amber-400/70 pt-0.5">Territory / dependency</p>
-          )}
-        </div>
+        <button
+          onClick={onClose}
+          className="text-white/30 hover:text-white/70 transition-colors text-lg leading-none ml-2 shrink-0 mt-0.5"
+          aria-label="Close"
+        >
+          ✕
+        </button>
       </div>
-    </>
+
+      {/* Fields */}
+      <div className="px-4 py-3 space-y-2.5">
+        <Row label="Capital"        value={country.capital || '—'} />
+        <Row label="Region"         value={country.region} />
+        <Row label="Population"     value={country.population ? fmtPop(country.population) : '—'} />
+        <Row label="Area"           value={fmtArea(country.area_km2)} />
+        <Row label="GDP per capita" value={fmtCurrency(country.gdp_ppp_per_capita)} />
+        {country.is_territory && (
+          <p className="text-xs text-amber-400/70 pt-0.5">Territory / dependency</p>
+        )}
+      </div>
+    </div>
   )
 }
 

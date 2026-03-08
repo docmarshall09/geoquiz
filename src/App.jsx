@@ -61,6 +61,14 @@ export default function App() {
   const [selectedCountryId, setSelectedCountryId] = useState(null)
   const [clickCoords, setClickCoords] = useState(null)
 
+  // Map-space (pre-transform) coordinates of the click point.
+  // Map draws the dot + fan lines imperatively using these, so they track the map on zoom/pan.
+  const [dotMapCoords, setDotMapCoords] = useState(null)
+
+  // Card corners in container coords — written by Scorecard after positioning,
+  // read by Map to draw the fan-line endpoints.
+  const [cardCorners, setCardCorners] = useState(null)
+
   // ── Regular Quiz ──────────────────────────────────────────────────────────
   const [quizOptions, setQuizOptions] = useState(null)
 
@@ -121,14 +129,21 @@ export default function App() {
       : null
 
   // ── Handlers ──────────────────────────────────────────────────────────────
+  // coords = { screen: { x, y }, map: [mx, my] } from Map click handlers.
+  // screen coords go to Scorecard for card positioning;
+  // map coords go to Map for dot tracking during zoom/pan.
   const handleCountryClick = (isoNumeric, coords) => {
     if (mode === 'Learn') {
       if (isoNumeric === selectedCountryId) {
         setSelectedCountryId(null)
         setClickCoords(null)
+        setDotMapCoords(null)
+        setCardCorners(null)
       } else {
         setSelectedCountryId(isoNumeric)
-        setClickCoords(coords ?? null)
+        setClickCoords(coords?.screen ?? null)
+        setDotMapCoords(coords?.map ?? null)
+        setCardCorners(null) // corners will be set by Scorecard after it positions
       }
     } else if (mode === 'Quiz' && quizOptions && quizOptions.direction !== 'map-to-name') {
       quiz.handleCountryClick(isoNumeric)
@@ -141,6 +156,8 @@ export default function App() {
     if (mode === 'Learn') {
       setSelectedCountryId(null)
       setClickCoords(null)
+      setDotMapCoords(null)
+      setCardCorners(null)
     }
   }
 
@@ -148,6 +165,8 @@ export default function App() {
     setMode(m)
     setSelectedCountryId(null)
     setClickCoords(null)
+    setDotMapCoords(null)
+    setCardCorners(null)
     setQuizOptions(null)
     setQqOptions(null)
   }
@@ -213,6 +232,8 @@ export default function App() {
           onCountryClick={handleCountryClick}
           onBackgroundClick={handleMapBackground}
           quizHighlights={activeHighlights}
+          dotMapCoords={dotMapCoords}
+          cardCorners={cardCorners}
         />
 
         {/* Learn Mode: scorecard callout */}
@@ -220,7 +241,13 @@ export default function App() {
           <Scorecard
             country={selectedCountry}
             clickCoords={clickCoords}
-            onClose={() => { setSelectedCountryId(null); setClickCoords(null) }}
+            onCornersChange={setCardCorners}
+            onClose={() => {
+              setSelectedCountryId(null)
+              setClickCoords(null)
+              setDotMapCoords(null)
+              setCardCorners(null)
+            }}
           />
         )}
 

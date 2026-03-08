@@ -148,7 +148,9 @@ export default function Scorecard({ country, clickCoords, onCornersChange, onClo
         <Row label="Area"           value={fmtArea(country.area_km2)} />
         <Row label="GDP per capita" value={fmtCurrency(country.gdp_ppp_per_capita)} />
         {country.is_territory && (
-          <p className="text-xs text-amber-400/70 pt-0.5">Territory / dependency</p>
+          <p className="text-xs text-amber-400/70 pt-0.5">
+            {country.territory_of ? `Territory of ${country.territory_of}` : 'Territory / dependency'}
+          </p>
         )}
       </div>
     </div>

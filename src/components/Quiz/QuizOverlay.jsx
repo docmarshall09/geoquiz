@@ -76,29 +76,34 @@ export default function QuizOverlay({
 
       {/* ── Correct feedback (auto-dismisses) ── */}
       {phase === 'correct' && (
-        <div
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-xl px-6 py-3"
-          style={{
-            background: 'rgba(20, 83, 45, 0.92)',
-            border: '1px solid rgba(34,197,94,0.35)',
-            backdropFilter: 'blur(10px)',
-          }}
-        >
-          <span className="text-green-400 text-xl">✓</span>
-          <span className="text-green-300 font-semibold text-lg">Correct!</span>
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+          <div
+            className="flex items-center gap-2 rounded-xl px-6 py-3"
+            style={{
+              background: 'rgba(20, 83, 45, 0.92)',
+              border: '1px solid rgba(34,197,94,0.35)',
+              backdropFilter: 'blur(10px)',
+              animation: 'feedback-pop 0.35s cubic-bezier(.34,1.56,.64,1) both',
+            }}
+          >
+            <span className="text-green-400 text-xl">✓</span>
+            <span className="text-green-300 font-semibold text-lg">Correct!</span>
+          </div>
         </div>
       )}
 
       {/* ── Incorrect feedback + Next button ── */}
       {phase === 'incorrect' && (
-        <div
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-4 rounded-xl px-5 py-3"
-          style={{
-            background: 'rgba(40, 16, 16, 0.92)',
-            border: '1px solid rgba(239,68,68,0.30)',
-            backdropFilter: 'blur(10px)',
-          }}
-        >
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+          <div
+            className="flex items-center gap-4 rounded-xl px-5 py-3"
+            style={{
+              background: 'rgba(40, 16, 16, 0.92)',
+              border: '1px solid rgba(239,68,68,0.30)',
+              backdropFilter: 'blur(10px)',
+              animation: 'feedback-shake 0.4s ease both',
+            }}
+          >
           <div className="flex items-center gap-2">
             <span className="text-red-400 text-lg">✗</span>
             <span className="text-white/70 text-sm">
@@ -114,6 +119,7 @@ export default function QuizOverlay({
           >
             Next →
           </button>
+          </div>
         </div>
       )}
     </>
@@ -217,6 +223,7 @@ function MapToNameOverlay({ currentCountry, phase, score, position, typedAnswer,
               background: 'rgba(20, 83, 45, 0.95)',
               border: '1px solid rgba(34,197,94,0.40)',
               backdropFilter: 'blur(12px)',
+              animation: 'feedback-pop 0.35s cubic-bezier(.34,1.56,.64,1) both',
             }}
           >
             <div className="flex items-center justify-center gap-2 mb-1">
@@ -235,6 +242,7 @@ function MapToNameOverlay({ currentCountry, phase, score, position, typedAnswer,
               background: 'rgba(40, 16, 16, 0.95)',
               border: '1px solid rgba(239,68,68,0.35)',
               backdropFilter: 'blur(12px)',
+              animation: 'feedback-shake 0.4s ease both',
             }}
           >
             <div className="flex items-start justify-between gap-4">

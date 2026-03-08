@@ -354,12 +354,14 @@ export default function Map({
 
     // Reset everything to default
     svg.selectAll('path.country')
+      .classed('map-pulse-correct map-pulse-wrong', false)
       .attr('fill', COLORS.land)
       .attr('stroke', COLORS.border)
       .attr('stroke-width', 0.5)
     svg.selectAll('g.marker-group')
       .classed('quiz-target', false)
     svg.selectAll('g.marker-group circle.marker-visual')
+      .classed('map-pulse-correct map-pulse-wrong', false)
       .attr('fill', MARKER.fill)
       .attr('stroke', MARKER.stroke)
       .attr('stroke-width', MARKER.strokeWidth)
@@ -395,14 +397,23 @@ export default function Map({
         } else {
           const fill = state === 'wrong' ? COLORS.wrong : COLORS.correct
           const stroke = state === 'wrong' ? COLORS.wrongStroke : COLORS.correctStroke
-          svg.select(`path.country[data-id="${id}"]`)
+          const pulseClass = state === 'wrong' ? 'map-pulse-wrong' : 'map-pulse-correct'
+
+          const path = svg.select(`path.country[data-id="${id}"]`)
+          path
             .attr('fill', fill)
             .attr('stroke', stroke)
             .attr('stroke-width', 1.5)
-          svg.select(`g.marker-group[data-id="${id}"] circle.marker-visual`)
+            .classed(pulseClass, true)
+          path.node()?.addEventListener('animationend', () => path.classed(pulseClass, false), { once: true })
+
+          const marker = svg.select(`g.marker-group[data-id="${id}"] circle.marker-visual`)
+          marker
             .attr('fill', fill)
             .attr('stroke', stroke)
             .attr('stroke-width', 1.5)
+            .classed(pulseClass, true)
+          marker.node()?.addEventListener('animationend', () => marker.classed(pulseClass, false), { once: true })
         }
       })
     }

@@ -20,63 +20,65 @@ export default function QuickQuizResults({
 
   return (
     <div
-      className="absolute inset-0 flex flex-col items-center justify-center p-8"
+      className="absolute inset-0 flex flex-col items-center overflow-hidden"
       style={{ background: 'rgba(10, 15, 26, 0.93)', backdropFilter: 'blur(16px)' }}
     >
-      <div className="text-white/40 text-xs uppercase tracking-widest mb-4">
-        Quick Quiz Complete
-      </div>
-
-      {/* Score display */}
-      <div className="flex items-end gap-2 mb-1">
-        <span className={`text-8xl font-bold leading-none ${accuracyColor}`}>
-          {score.correct}
-        </span>
-        <span className="text-white/25 text-4xl font-light mb-2">/ {total}</span>
-      </div>
-
-      <div className={`text-2xl font-semibold mb-1 ${accuracyColor}`}>{accuracy}%</div>
-
-      {/* Stats row */}
-      <div className="flex items-center gap-3 text-sm text-white/40 mb-8">
-        <span>{score.correct} correct</span>
-        <span className="text-white/15">·</span>
-        <span>{score.incorrect} incorrect</span>
-        <span className="text-white/15">·</span>
-        <span className="flex items-center gap-1">
-          <span className="text-white/30">⏱</span>
-          <span className="tabular-nums">{formatTime(elapsedSeconds)}</span>
-        </span>
-      </div>
-
-      {/* Missed countries */}
-      {wrongList.length === 0 ? (
-        <div className="text-green-400 text-lg font-semibold mb-8">Perfect! 🎉</div>
-      ) : (
-        <div className="w-full max-w-sm mb-8">
-          <div className="text-white/40 text-xs uppercase tracking-widest mb-3">
-            Missed ({wrongList.length})
-          </div>
-          <div
-            className="space-y-1.5 overflow-y-auto pr-1"
-            style={{ maxHeight: '220px' }}
-          >
-            {wrongList.map((country) => (
-              <div
-                key={country.iso_numeric}
-                className="flex items-center gap-3 rounded-lg px-3 py-2"
-                style={{ background: 'rgba(255,255,255,0.05)' }}
-              >
-                <span className="text-xl leading-none shrink-0">{country.flag_emoji}</span>
-                <span className="text-white/80 text-sm">{country.name}</span>
-              </div>
-            ))}
-          </div>
+      {/* Stats — fixed at top */}
+      <div className="shrink-0 pt-8 pb-4 flex flex-col items-center text-center">
+        <div className="text-white/40 text-xs uppercase tracking-widest mb-4">
+          Quick Quiz Complete
         </div>
-      )}
 
-      {/* Action buttons */}
-      <div className="flex gap-3">
+        {/* Score display */}
+        <div className="flex items-end gap-2 mb-1">
+          <span className={`text-8xl font-bold leading-none ${accuracyColor}`}>
+            {score.correct}
+          </span>
+          <span className="text-white/25 text-4xl font-light mb-2">/ {total}</span>
+        </div>
+
+        <div className={`text-2xl font-semibold mb-1 ${accuracyColor}`}>{accuracy}%</div>
+
+        {/* Stats row */}
+        <div className="flex items-center gap-3 text-sm text-white/40">
+          <span>{score.correct} correct</span>
+          <span className="text-white/15">·</span>
+          <span>{score.incorrect} incorrect</span>
+          <span className="text-white/15">·</span>
+          <span className="flex items-center gap-1">
+            <span className="text-white/30">⏱</span>
+            <span className="tabular-nums">{formatTime(elapsedSeconds)}</span>
+          </span>
+        </div>
+      </div>
+
+      {/* Missed countries — scrollable, takes remaining space */}
+      <div className="flex-1 min-h-0 overflow-y-auto w-full flex flex-col items-center px-4 py-4">
+        {wrongList.length === 0 ? (
+          <div className="text-green-400 text-lg font-semibold">Perfect! 🎉</div>
+        ) : (
+          <div className="w-full max-w-sm">
+            <div className="text-white/40 text-xs uppercase tracking-widest mb-3">
+              Missed ({wrongList.length})
+            </div>
+            <div className="space-y-1.5 pr-1">
+              {wrongList.map((country) => (
+                <div
+                  key={country.iso_numeric}
+                  className="flex items-center gap-3 rounded-lg px-3 py-2"
+                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                >
+                  <span className="text-xl leading-none shrink-0">{country.flag_emoji}</span>
+                  <span className="text-white/80 text-sm">{country.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Action buttons — always visible at bottom */}
+      <div className="shrink-0 py-6 flex gap-3">
         <button
           onClick={onChangeSettings}
           className="px-6 py-3 rounded-xl text-white/60 hover:text-white font-medium text-sm transition-colors"

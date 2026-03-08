@@ -271,46 +271,52 @@ function RoundComplete({ score, total, wrongList, onRestart }) {
 
   return (
     <div
-      className="absolute inset-0 flex flex-col items-center justify-center p-8"
+      className="absolute inset-0 flex flex-col items-center overflow-hidden"
       style={{ background: 'rgba(10, 15, 26, 0.93)', backdropFilter: 'blur(16px)' }}
     >
-      <div className="text-white/40 text-xs uppercase tracking-widest mb-2">Round Complete</div>
-      <div className={`text-7xl font-bold mb-1 ${accuracyColor}`}>{accuracy}%</div>
-      <div className="text-white/50 text-sm mb-8">
-        {score.correct} correct · {score.incorrect} incorrect · {total} total
+      {/* Stats — fixed at top */}
+      <div className="shrink-0 pt-8 pb-4 flex flex-col items-center text-center">
+        <div className="text-white/40 text-xs uppercase tracking-widest mb-2">Round Complete</div>
+        <div className={`text-7xl font-bold mb-1 ${accuracyColor}`}>{accuracy}%</div>
+        <div className="text-white/50 text-sm">
+          {score.correct} correct · {score.incorrect} incorrect · {total} total
+        </div>
       </div>
 
-      {wrongList.length === 0 ? (
-        <div className="text-green-400 text-lg font-semibold mb-8">Perfect round! 🎉</div>
-      ) : (
-        <div className="w-full max-w-sm mb-8">
-          <div className="text-white/40 text-xs uppercase tracking-widest mb-3">
-            Missed ({wrongList.length})
+      {/* Missed list — scrollable, takes remaining space */}
+      <div className="flex-1 min-h-0 overflow-y-auto w-full flex flex-col items-center px-4 py-4">
+        {wrongList.length === 0 ? (
+          <div className="text-green-400 text-lg font-semibold">Perfect round! 🎉</div>
+        ) : (
+          <div className="w-full max-w-sm">
+            <div className="text-white/40 text-xs uppercase tracking-widest mb-3">
+              Missed ({wrongList.length})
+            </div>
+            <div className="space-y-1.5 pr-1">
+              {wrongList.map((country) => (
+                <div
+                  key={country.iso_numeric}
+                  className="flex items-center gap-3 rounded-lg px-3 py-2"
+                  style={{ background: 'rgba(255,255,255,0.05)' }}
+                >
+                  <span className="text-xl leading-none shrink-0">{country.flag_emoji}</span>
+                  <span className="text-white/80 text-sm">{country.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <div
-            className="space-y-1.5 overflow-y-auto pr-1"
-            style={{ maxHeight: '260px' }}
-          >
-            {wrongList.map((country) => (
-              <div
-                key={country.iso_numeric}
-                className="flex items-center gap-3 rounded-lg px-3 py-2"
-                style={{ background: 'rgba(255,255,255,0.05)' }}
-              >
-                <span className="text-xl leading-none shrink-0">{country.flag_emoji}</span>
-                <span className="text-white/80 text-sm">{country.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
+      </div>
 
-      <button
-        onClick={onRestart}
-        className="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-base transition-colors"
-      >
-        Play Again
-      </button>
+      {/* Button — always visible at bottom */}
+      <div className="shrink-0 py-6">
+        <button
+          onClick={onRestart}
+          className="px-8 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-base transition-colors"
+        >
+          Play Again
+        </button>
+      </div>
     </div>
   )
 }

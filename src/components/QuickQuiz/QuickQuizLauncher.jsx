@@ -80,19 +80,20 @@ export default function QuickQuizLauncher({ onStart }) {
       style={{ background: 'rgba(10,15,26,0.88)', backdropFilter: 'blur(10px)' }}
     >
       <div
-        className="rounded-2xl w-80 overflow-hidden"
+        className="rounded-2xl w-80 flex flex-col"
         style={{
+          maxHeight: 'calc(100vh - 120px)',
           background: 'rgba(13,24,41,0.97)',
           border: '1px solid rgba(255,255,255,0.08)',
         }}
       >
         {/* Header */}
-        <div className="px-6 pt-6 pb-4 border-b border-white/5">
+        <div className="px-6 pt-6 pb-4 border-b border-white/5 shrink-0">
           <h2 className="text-white font-bold text-xl">Quick Quiz</h2>
           <p className="text-white/35 text-xs mt-0.5">10 questions · fast practice</p>
         </div>
 
-        <div className="px-6 py-5 space-y-5">
+        <div className="px-6 py-5 space-y-5 overflow-y-auto flex-1 min-h-0">
           {/* ── Direction ── */}
           <div>
             <div className="text-white/40 text-[10px] uppercase tracking-widest mb-3">
@@ -225,7 +226,7 @@ export default function QuickQuizLauncher({ onStart }) {
         </div>
 
         {/* ── Footer ── */}
-        <div className="px-6 pb-6 pt-1">
+        <div className="px-6 pb-6 pt-4 shrink-0 border-t border-white/5">
           <div className="text-white/35 text-xs mb-4">
             {questionCount === 0 ? (
               <span className="text-red-400/70">No countries available</span>

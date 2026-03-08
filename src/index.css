@@ -9,6 +9,12 @@
   user-select: none;
 }
 
+/* Promote the zoom/pan group to its own compositor layer.
+   This isolates repaints from zoom/pan transforms to this subtree only. */
+.map-root {
+  will-change: transform;
+}
+
 /* Country polygons: pointer cursor, smooth hover transition via CSS (GPU-accelerated) */
 .map-svg path.country {
   cursor: pointer;

@@ -129,11 +129,13 @@ export default function Map({
       })
 
     // Invisible large hit target — constant 20px in screen space
+    // pointer-events: all so the transparent fill still captures events
     groups.append('circle')
       .attr('class', 'marker-hit')
       .attr('r', 20)
       .attr('fill', 'white')
       .attr('fill-opacity', 0)
+      .attr('pointer-events', 'all')
 
     // Visible styled circle — shrinks slightly with zoom, pointer-events disabled
     groups.append('circle')
@@ -148,12 +150,24 @@ export default function Map({
     // Zoom + pan
     // translateExtent([[0,0],[w,h]]) keeps the map filling the viewport at all
     // zoom levels: at k=1 no panning; at k=N can pan across the full world.
+    //
+    // Trackpads fire wheel events at up to 120Hz. Applying the main group
+    // transform must stay synchronous for a responsive feel, but the marker
+    // repositioning (14 DOM writes across 7 elements) is throttled to one
+    // update per animation frame (~60fps max) to avoid layout thrash.
+    let markerRafId = null
     const zoom = d3.zoom()
       .scaleExtent(ZOOM_EXTENT)
       .translateExtent([[0, 0], [width, height]])
       .on('zoom', (event) => {
         g.attr('transform', event.transform)
-        updateMarkers(event.transform)
+        currentTransformRef.current = event.transform
+        if (markerRafId === null) {
+          markerRafId = requestAnimationFrame(() => {
+            markerRafId = null
+            updateMarkersRef.current?.(currentTransformRef.current)
+          })
+        }
       })
 
     svg
@@ -208,6 +222,7 @@ export default function Map({
 
     window.addEventListener('resize', handleResize)
     return () => {
+      if (markerRafId !== null) cancelAnimationFrame(markerRafId)
       window.removeEventListener('resize', handleResize)
       svgEl.removeEventListener('mousedown', onMouseDown)
       document.removeEventListener('mouseup', onMouseUp)

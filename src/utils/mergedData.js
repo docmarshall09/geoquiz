@@ -35,3 +35,9 @@ export const mergedCountries = countriesRaw.map((c) => {
     territory_of: s.territory_of !== undefined ? s.territory_of : null,
   }
 })
+
+// Lookup by ISO numeric string — includes all supplemental fields (territory_of, etc.)
+const mergedByIsoNumeric = new Map(mergedCountries.map((c) => [c.iso_numeric, c]))
+export function getCountryByIsoNumeric(id) {
+  return mergedByIsoNumeric.get(id) ?? null
+}

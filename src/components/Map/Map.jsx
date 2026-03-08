@@ -125,7 +125,7 @@ export default function Map({
       .attr('data-id', (d) => d.id)
       .on('click', (event, d) => {
         event.stopPropagation()
-        onCountryClickRef.current?.(d.id)
+        onCountryClickRef.current?.(d.id, { x: event.clientX, y: event.clientY })
       })
 
     // Invisible large hit target — constant 20px in screen space
@@ -200,7 +200,7 @@ export default function Map({
         .on('click', (event, d) => {
           event.stopPropagation()
           const id = d.id !== undefined ? String(d.id) : d.properties?.name
-          if (id) onCountryClickRef.current?.(id)
+          if (id) onCountryClickRef.current?.(id, { x: event.clientX, y: event.clientY })
         })
     })
 

@@ -59,6 +59,7 @@ function buildQQCountries(options, progress) {
 export default function App() {
   const [mode, setMode] = useState('Learn')
   const [selectedCountryId, setSelectedCountryId] = useState(null)
+  const [clickCoords, setClickCoords] = useState(null)
 
   // ── Regular Quiz ──────────────────────────────────────────────────────────
   const [quizOptions, setQuizOptions] = useState(null)
@@ -120,9 +121,15 @@ export default function App() {
       : null
 
   // ── Handlers ──────────────────────────────────────────────────────────────
-  const handleCountryClick = (isoNumeric) => {
+  const handleCountryClick = (isoNumeric, coords) => {
     if (mode === 'Learn') {
-      setSelectedCountryId(isoNumeric === selectedCountryId ? null : isoNumeric)
+      if (isoNumeric === selectedCountryId) {
+        setSelectedCountryId(null)
+        setClickCoords(null)
+      } else {
+        setSelectedCountryId(isoNumeric)
+        setClickCoords(coords ?? null)
+      }
     } else if (mode === 'Quiz' && quizOptions && quizOptions.direction !== 'map-to-name') {
       quiz.handleCountryClick(isoNumeric)
     } else if (mode === 'Quick Quiz' && qqOptions && qqOptions.direction !== 'map-to-name') {
@@ -131,12 +138,16 @@ export default function App() {
   }
 
   const handleMapBackground = () => {
-    if (mode === 'Learn') setSelectedCountryId(null)
+    if (mode === 'Learn') {
+      setSelectedCountryId(null)
+      setClickCoords(null)
+    }
   }
 
   const handleModeChange = (m) => {
     setMode(m)
     setSelectedCountryId(null)
+    setClickCoords(null)
     setQuizOptions(null)
     setQqOptions(null)
   }
@@ -204,11 +215,12 @@ export default function App() {
           quizHighlights={activeHighlights}
         />
 
-        {/* Learn Mode: scorecard panel */}
+        {/* Learn Mode: scorecard callout */}
         {mode === 'Learn' && selectedCountry && (
           <Scorecard
             country={selectedCountry}
-            onClose={() => setSelectedCountryId(null)}
+            clickCoords={clickCoords}
+            onClose={() => { setSelectedCountryId(null); setClickCoords(null) }}
           />
         )}
 

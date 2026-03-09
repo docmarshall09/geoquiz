@@ -4,6 +4,7 @@
 
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { getRank, ordinal } from '../../utils/rankings'
+import { getTravelScore } from '../../utils/travelScore'
 
 const KM2_TO_MI2 = 0.386102
 const CARD_W = 340    // card pixel width
@@ -176,6 +177,19 @@ export default function Scorecard({ country, clickCoords, onCornersChange, onClo
             rank={!country.is_territory ? getRank('gdp_ppp_per_capita', country.name) : null}
           />
         } />
+        {!country.is_territory && (() => {
+          const ts = getTravelScore(country.name)
+          if (!ts) return null
+          const color = ts.score >= 8.0 ? '#4ade80' : ts.score >= 5.0 ? '#facc15' : '#f87171'
+          return (
+            <Row label="Travel Score" value={
+              <span style={{ color, fontWeight: 500 }}>
+                {ts.score.toFixed(1)}{' '}
+                <span style={{ color: 'rgba(255,255,255,0.35)', fontWeight: 400, fontSize: '0.85em' }}>/ 10</span>
+              </span>
+            } />
+          )
+        })()}
         {country.is_territory && (
           <p className="text-xs text-amber-400/70 pt-0.5">
             {country.territory_of ? `Territory of ${country.territory_of}` : 'Territory / dependency'}

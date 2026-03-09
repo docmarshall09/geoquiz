@@ -158,9 +158,12 @@ export default function Scorecard({ country, clickCoords, onCornersChange, onClo
 
   const handleTooltipClick = (e) => {
     e.stopPropagation()
+    // Read rect synchronously — e.currentTarget is nullified after the handler returns
+    // so it cannot be accessed inside the setTooltipPos updater callback.
+    const rect = e.currentTarget?.getBoundingClientRect()
     setTooltipPos((prev) => {
       if (prev) return null
-      const rect = e.currentTarget.getBoundingClientRect()
+      if (!rect) return null
       // Clamp so the 290px panel doesn't overflow the right edge
       return { x: Math.min(rect.left, window.innerWidth - 300), y: rect.bottom + 6 }
     })

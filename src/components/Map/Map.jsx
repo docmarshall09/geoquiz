@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 import { feature } from 'topojson-client'
 import { MICROSTATES } from '../../utils/microstates'
+import { ISLAND_EMPHASIS_IDS } from '../../utils/islandEmphasis'
 
 const COLORS = {
   ocean: '#0a0f1a',
   land: '#1a2740',
+  islandFill: '#2a4a6a',   // subtly brighter fill for small island nations
   border: '#0d1829',
   graticule: '#111e33',
   selected: '#2d4a7c',
@@ -259,7 +261,7 @@ export default function Map({
         .attr('class', 'country')
         .attr('data-id', (d) => d.id !== undefined ? d.id : d.properties?.name)
         .attr('d', pathGen)
-        .attr('fill', COLORS.land)
+        .attr('fill', (d) => ISLAND_EMPHASIS_IDS.has(d.id) ? COLORS.islandFill : COLORS.land)
         .attr('stroke', COLORS.border)
         .attr('stroke-width', 0.5)
         .on('click', (event, d) => {
@@ -374,10 +376,10 @@ export default function Map({
     // Keep ref in sync so updateMarkers can read latest highlights
     quizHighlightsRef.current = quizHighlights
 
-    // Reset everything to default
+    // Reset everything to default (preserve island emphasis fill)
     svg.selectAll('path.country')
       .classed('map-pulse-correct map-pulse-wrong', false)
-      .attr('fill', COLORS.land)
+      .attr('fill', (d) => ISLAND_EMPHASIS_IDS.has(d.id) ? COLORS.islandFill : COLORS.land)
       .attr('stroke', COLORS.border)
       .attr('stroke-width', 0.5)
     svg.selectAll('g.marker-group')

@@ -3,6 +3,7 @@
 // Scorecard only renders the card; it writes its corner positions to App via onCornersChange.
 
 import { useState, useEffect, useLayoutEffect, useRef } from 'react'
+import { getRank, ordinal } from '../../utils/rankings'
 
 const KM2_TO_MI2 = 0.386102
 const CARD_W = 340    // card pixel width
@@ -17,6 +18,19 @@ function fmtArea(km2) {
   return `${km2.toLocaleString()} km² / ${Math.round(km2 * KM2_TO_MI2).toLocaleString()} mi²`
 }
 function fmtPop(n) { return (!n && n !== 0) ? '—' : n.toLocaleString() }
+
+/** Render a formatted value with an optional rank badge (sovereign nations only). */
+function ValueWithRank({ value, rank }) {
+  if (!rank || value === '—') return <>{value}</>
+  return (
+    <>
+      {value}{' '}
+      <span style={{ fontSize: '0.78em', fontWeight: 400, opacity: 0.55 }}>
+        ({ordinal(rank)})
+      </span>
+    </>
+  )
+}
 
 /**
  * Compute card position in map-container coordinates.
@@ -144,9 +158,24 @@ export default function Scorecard({ country, clickCoords, onCornersChange, onClo
       <div className="px-4 py-3 space-y-2.5">
         <Row label="Capital"        value={country.capital || '—'} />
         <Row label="Region"         value={country.region} />
-        <Row label="Population"     value={country.population ? fmtPop(country.population) : '—'} />
-        <Row label="Area"           value={fmtArea(country.area_km2)} />
-        <Row label="GDP per capita" value={fmtCurrency(country.gdp_ppp_per_capita)} />
+        <Row label="Population" value={
+          <ValueWithRank
+            value={country.population ? fmtPop(country.population) : '—'}
+            rank={!country.is_territory ? getRank('population', country.name) : null}
+          />
+        } />
+        <Row label="Area" value={
+          <ValueWithRank
+            value={fmtArea(country.area_km2)}
+            rank={!country.is_territory ? getRank('area_km2', country.name) : null}
+          />
+        } />
+        <Row label="GDP per capita" value={
+          <ValueWithRank
+            value={fmtCurrency(country.gdp_ppp_per_capita)}
+            rank={!country.is_territory ? getRank('gdp_ppp_per_capita', country.name) : null}
+          />
+        } />
         {country.is_territory && (
           <p className="text-xs text-amber-400/70 pt-0.5">
             {country.territory_of ? `Territory of ${country.territory_of}` : 'Territory / dependency'}

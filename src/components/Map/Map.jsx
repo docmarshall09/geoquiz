@@ -273,6 +273,23 @@ export default function Map({
             map: mapPt,
           })
         })
+
+      // Leader lines for offset markers — in geo-space (inside g), above land, below circles.
+      // These use the projection directly; D3's zoom transform on g handles pan/zoom for free.
+      // Only rendered for entries that have trueCoords (i.e. the circle is offset from reality).
+      const leaderEntries = MICROSTATES.filter((d) => d.trueCoords)
+      g.selectAll('line.leader-line')
+        .data(leaderEntries, (d) => d.id)
+        .join('line')
+        .attr('class', 'leader-line')
+        .attr('pointer-events', 'none')
+        .attr('stroke', MARKER.stroke)
+        .attr('stroke-width', 1)
+        .attr('stroke-opacity', 0.3)
+        .attr('x1', (d) => projection(d.coords)?.[0])
+        .attr('y1', (d) => projection(d.coords)?.[1])
+        .attr('x2', (d) => projection(d.trueCoords)?.[0])
+        .attr('y2', (d) => projection(d.trueCoords)?.[1])
     })
 
     // Resize: refit projection, update translate extent, reset zoom
@@ -287,6 +304,11 @@ export default function Map({
       zoom.translateExtent([[0, 0], [w, h]])
       g.select('.graticule').attr('d', pathGen)
       g.selectAll('.country').attr('d', pathGen)
+      g.selectAll('line.leader-line')
+        .attr('x1', (d) => projection(d.coords)?.[0])
+        .attr('y1', (d) => projection(d.coords)?.[1])
+        .attr('x2', (d) => projection(d.trueCoords)?.[0])
+        .attr('y2', (d) => projection(d.trueCoords)?.[1])
       svg.call(zoom.transform, d3.zoomIdentity)
       updateMarkers(d3.zoomIdentity)
       updateAnnotationRef.current?.(d3.zoomIdentity)

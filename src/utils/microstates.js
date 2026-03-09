@@ -1,6 +1,11 @@
 // Countries that get circle markers: microstates and small territories whose polygon
 // is too small to reliably see or click at default world zoom.
-// coords: [longitude, latitude]  |  id: ISO 3166-1 numeric (matches TopoJSON + countryData)
+//
+// coords:     [longitude, latitude] — where the circle is drawn (display position)
+// trueCoords: [longitude, latitude] — real geographic center (only set when coords is offset)
+//             When present, Map.jsx draws a thin leader line from the circle back to trueCoords.
+//
+// id: ISO 3166-1 numeric (matches TopoJSON + countryData)
 export const MICROSTATES = [
   // ── Microstates ────────────────────────────────────────────────────────────
   { id: '336', name: 'Vatican City',         coords: [ 12.4534,  41.9029] }, // inside Italy
@@ -12,12 +17,16 @@ export const MICROSTATES = [
   { id: '048', name: 'Bahrain',              coords: [ 50.5577,  26.0275] }, // off Saudi coast
 
   // ── Small territories ──────────────────────────────────────────────────────
-  { id: '652', name: 'Saint Barthélemy',         coords: [-62.8300,  17.9000] }, // eastern Caribbean
+  // Leeward Islands cluster — circles offset so they don't overlap at default zoom.
+  // trueCoords = real island position; leader line connects the dot to the island.
+  { id: '660', name: 'Anguilla',         coords: [-63.50, 18.60], trueCoords: [-63.07, 18.22] },
+  { id: '663', name: 'Saint Martin',     coords: [-62.50, 18.50], trueCoords: [-63.05, 18.08] },
+  { id: '534', name: 'Sint Maarten',     coords: [-62.50, 17.60], trueCoords: [-63.05, 18.03] },
+  { id: '652', name: 'Saint Barthélemy', coords: [-63.40, 17.50], trueCoords: [-62.83, 17.90] },
+
+  // Non-overlapping territories — coords = true position, no leader line needed
   { id: '446', name: 'Macau',                    coords: [113.5500,  22.1700] }, // Pearl River Delta
-  { id: '534', name: 'Sint Maarten',             coords: [-63.0500,  18.0300] }, // Dutch south half
-  { id: '663', name: 'Saint Martin',             coords: [-63.0500,  18.0800] }, // French north half
   { id: '060', name: 'Bermuda',                  coords: [-64.7500,  32.3200] }, // North Atlantic
-  { id: '660', name: 'Anguilla',                 coords: [-63.0700,  18.2200] }, // eastern Caribbean
   { id: '500', name: 'Montserrat',               coords: [-62.1900,  16.7400] }, // eastern Caribbean
   { id: '092', name: 'Virgin Islands (British)', coords: [-64.6300,  18.4300] }, // eastern Caribbean
 ]
